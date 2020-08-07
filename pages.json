@@ -17,7 +17,7 @@
 			}
 		},
 		{
-			"path": "pages/index/index",
+			"path": "pages/Main/index",
 			"style": {
 				// #ifdef MP 
 				"navigationBarTitleText": "Dloud商城",
@@ -202,7 +202,7 @@
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
-				"pagePath": "pages/index/index",
+				"pagePath": "pages/Main/index",
 				"iconPath": "static/tab-home.png",
 				"selectedIconPath": "static/tab-home-current.png",
 				"text": "首页"

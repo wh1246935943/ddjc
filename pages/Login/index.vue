@@ -73,7 +73,7 @@
 			},
 			toLogin(){
 				const {username, password, mode} = this;
-				uni.switchTab({url: '/pages/index/index'})
+				uni.switchTab({url: '/pages/Main/index'})
 			}
 		},
 

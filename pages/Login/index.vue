@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<view class="left-bottom-sign"></view>
-		<view class="back-btn yticon icon-zuojiantou-up" @click="() => uni.navigateBack()"></view>
+		<view class="back-btn yticon icon-zuojiantou-up" @click="navBack"></view>
 		<view class="right-top-sign"></view>
 		<!-- 设置白色背景防止软键盘把下部绝对定位元素顶上来盖住输入框等 -->
 		<view class="wrapper">
@@ -67,6 +67,9 @@
 			inputChange(e){
 				const key = e.currentTarget.dataset.key;
 				this[key] = e.detail.value;
+			},
+			navBack() {
+				uni.navigateBack()
 			},
 			toRegist(){
 				this.$api.msg('去注册');

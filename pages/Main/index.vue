@@ -46,17 +46,6 @@
 				<text class="yticon icon-you"></text>
 			</view>
 		</view>
-		<view class="f-header m-t">
-			<view class="tit-box">
-				<text class="tit">任务一</text>
-				<text class="tit2">西安变电站</text>
-				<text class="tit2">TV测试</text>
-			</view>
-			<view>
-				<text class="tit3">开关柜</text>
-				<text class="yticon icon-you"></text>
-			</view>
-		</view>
 	</view>
 </template>
 

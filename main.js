@@ -2,6 +2,7 @@ import Vue from 'vue';
 import store from './store';
 import App from './App';
 import { stringify } from 'qs';
+import service from './request/index.js';
 
 import Json from './Json'; //测试用数据
 /**
@@ -22,7 +23,8 @@ const msg = (title, duration=1500, mask=false, icon='none')=>{
 		mask,
 		icon
 	});
-}
+};
+
 const json = type=>{
 	//模拟异步请求数据
 	return new Promise(resolve=>{
@@ -30,7 +32,7 @@ const json = type=>{
 			resolve(Json[type]);
 		}, 500)
 	})
-}
+};
 
 const prePage = ()=>{
 	let pages = getCurrentPages();
@@ -39,7 +41,17 @@ const prePage = ()=>{
 	return prePage;
 	// #endif
 	return prePage.$vm;
-}
+};
+
+const showToast = (msg = '', verticalAlign = 'top', duration = 'long') => {
+	void plus.nativeUI.toast(
+		msg,
+		{
+			verticalAlign,
+			duration
+		}
+	)
+};
 
 const navTo = (params) => {
 	const fullParams = {param: {}, ...params};
@@ -47,14 +59,15 @@ const navTo = (params) => {
 		...fullParams,
 		url: `${fullParams.url}?${stringify(fullParams.param)}`
 	})
-}
-
+};
 
 Vue.config.productionTip = false
 Vue.prototype.$fire = new Vue();
 Vue.prototype.$store = store;
 Vue.prototype.$api = {msg, json, prePage};
 Vue.prototype.$navTo = navTo;
+Vue.prototype.$toast = showToast;
+Vue.prototype.$Service = service;
 
 App.mpType = 'app';
 

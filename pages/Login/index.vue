@@ -32,7 +32,12 @@
 							@input="inputChange"
 						/>
 					</view>
-					<button form-type="submit" class="confirm-btn">登录</button>
+					<button
+						form-type="submit"
+						:disabled="isLoading"
+						:loading="isLoading"
+						class="confirm-btn"
+					>登录</button>
 				</form>
 			</view>
 			<view class="forget-section">
@@ -48,13 +53,13 @@
 
 <script>
 	import { mapMutations } from 'vuex';
-	
 	export default{
 		data(){
 			return {
 				username: '',
 				password: '',
-				mode: ''
+				mode: '',
+				isLoading: false,
 			}
 		},
 		onLoad(option){
@@ -76,7 +81,15 @@
 			},
 			toLogin(){
 				const {username, password, mode} = this;
-				uni.switchTab({url: '/pages/Main/index'})
+				this.isLoading = true;
+				this.$Service.login({
+					username,
+					password
+				}).then((resp) => {
+					this.isLoading = false
+					console.log('login:::', resp);
+				})
+				// uni.switchTab({url: '/pages/Task/index'})
 			}
 		},
 
@@ -93,7 +106,9 @@
 		width: 100vw;
 		height: 100vh;
 		overflow: hidden;
-		background: #fff;
+		/* background: url(~@static/login_bg.jpg);
+		background-size: cover;
+		background-repeat: no-repeat; */
 	}
 	.wrapper{
 		position:relative;

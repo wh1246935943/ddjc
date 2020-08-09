@@ -35,6 +35,7 @@
 		width: 100%;
 		color: $font-color-base;
 		font-size: $font-size-base;
+		background: #f5f5f5;
 	}
 	/*
 		全局公共样式和字体图标

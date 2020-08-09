@@ -1,6 +1,5 @@
 {
-	"pages": [
-		{
+	"pages": [{
 			"path": "pages/PreLogin/index",
 			"style": {
 				"navigationStyle": "custom"
@@ -17,32 +16,44 @@
 			}
 		},
 		{
-			"path": "pages/Main/index",
+			"path": "pages/Task/index",
 			"style": {
-				// #ifdef MP 
-				"navigationBarTitleText": "Dloud商城",
-				//"navigationStyle": "custom",
-				// #endif 
+				"navigationBarTitleText": "任务列表",
 				"app-plus": {
 					"titleNView": {
 						"type": "transparent",
+						"buttons": [{
+							"text": "设置",
+							"fontSize": "16",
+							"background": "rgba(0,0,0,0)"
+						}]
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/Set/index",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
+		},
+		{
+			"path": "pages/Data/index",
+			"style": {
+				"app-plus": {
+					"titleNView": {
 						"searchInput": {
 							"backgroundColor": "rgba(231, 231, 231,.7)",
 							"borderRadius": "16px",
-							"placeholder": "请输入地址 如：大钟寺",
-							"disabled": true,
+							"placeholder": "搜索",
 							"placeholderColor": "#606266"
 						},
-						"buttons": [
-							{
-								"fontSrc": "/static/yticon.ttf",
-								"text": "\ue744",
-								"fontSize": "27",
-								"color": "#303133",
-								"background": "rgba(0,0,0,0)",
-								"redDot": true
-							}
-						]
+						"buttons": [{
+							"text": "搜索",
+							"fontSize": "14",
+							"color": "#fff",
+							"background": "rgba(0,0,0,0)"
+						}]
 					}
 				}
 			}
@@ -57,13 +68,7 @@
 					}
 				}
 			}
-		}, {
-			"path": "pages/set/set",
-			"style": {
-				"navigationBarTitleText": "设置"
-			}
 		},
-
 		{
 			"path": "pages/userinfo/userinfo",
 			"style": {
@@ -186,33 +191,25 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "#fff",
 		"navigationBarTitleText": "带电检测",
-		"navigationBarBackgroundColor": "#1f9689",
-		"backgroundColor": "red"
+		"navigationBarBackgroundColor": "#1f9689"
 	},
 	"tabBar": {
 		"color": "#C0C4CC",
 		"selectedColor": "#1f9689",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
-		"list": [
-			{
-				"pagePath": "pages/Main/index",
+		"list": [{
+				"pagePath": "pages/Task/index",
 				"iconPath": "static/tabbar_rw_n.png",
 				"selectedIconPath": "static/tabbar_rw_y.png",
 				"text": "任务"
 			},
 			{
-				"pagePath": "pages/category/category",
+				"pagePath": "pages/Data/index",
 				"iconPath": "static/tabbar_sj_n.png",
 				"selectedIconPath": "static/tabbar_sj_y.png",
 				"text": "数据管理"
 			}
-			// {
-			// 	"pagePath": "pages/category/category",
-			// 	"iconPath": "static/tabbar_sj_n.png",
-			// 	"selectedIconPath": "static/tabbar_sj_y.png",
-			// 	"text": "数据管理"
-			// },
 			// {
 			// 	"pagePath": "pages/cart/cart",
 			// 	"iconPath": "static/tab-cart.png",

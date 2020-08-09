@@ -32,6 +32,9 @@
 </script>
 
 <style lang="scss">
+page {
+	background: $base-color
+}
 .pre-login{
 	width: 100%;
 	height: 100%;

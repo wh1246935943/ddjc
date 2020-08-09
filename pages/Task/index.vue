@@ -46,20 +46,75 @@
 				<text class="yticon icon-you"></text>
 			</view>
 		</view>
+		<view class="f-header m-t">
+			<view class="tit-box">
+				<text class="tit">任务一</text>
+				<text class="tit2">西安变电站</text>
+				<text class="tit2">TV测试</text>
+			</view>
+			<view>
+				<text class="tit3">开关柜</text>
+				<text class="yticon icon-you"></text>
+			</view>
+		</view>
+		<view class="f-header m-t">
+			<view class="tit-box">
+				<text class="tit">任务一</text>
+				<text class="tit2">西安变电站</text>
+				<text class="tit2">TV测试</text>
+			</view>
+			<view>
+				<text class="tit3">开关柜</text>
+				<text class="yticon icon-you"></text>
+			</view>
+		</view>
+		<view class="f-header m-t">
+			<view class="tit-box">
+				<text class="tit">任务一</text>
+				<text class="tit2">西安变电站</text>
+				<text class="tit2">TV测试</text>
+			</view>
+			<view>
+				<text class="tit3">开关柜</text>
+				<text class="yticon icon-you"></text>
+			</view>
+		</view>
+		<view class="f-header m-t">
+			<view class="tit-box">
+				<text class="tit">任务一</text>
+				<text class="tit2">西安变电站</text>
+				<text class="tit2">TV测试</text>
+			</view>
+			<view>
+				<text class="tit3">开关柜</text>
+				<text class="yticon icon-you"></text>
+			</view>
+		</view>
+		<view class="f-header m-t">
+			<view class="tit-box">
+				<text class="tit">任务一</text>
+				<text class="tit2">西安变电站</text>
+				<text class="tit2">TV测试</text>
+			</view>
+			<view>
+				<text class="tit3">开关柜</text>
+				<text class="yticon icon-you"></text>
+			</view>
+		</view>
+		<item-card></item-card>
 	</view>
 </template>
 
 <script>
-
+	import { ItemCard } from 'wh-ui'
 	export default {
-
+		components:{ ItemCard },
 		data() {
 			return {
 				titleNViewBackground: '',
 				swiperCurrent: 0,
 				swiperLength: 0,
-				carouselList: [],
-				goodsList: []
+				carouselList: []
 			};
 		},
 
@@ -76,9 +131,6 @@
 				this.titleNViewBackground = carouselList[0].background;
 				this.swiperLength = carouselList.length;
 				this.carouselList = carouselList;
-				
-				let goodsList = await this.$api.json('goodsList');
-				this.goodsList = goodsList || [];
 			},
 			//轮播图切换修改背景色
 			swiperChange(e) {
@@ -95,31 +147,12 @@
 				})
 			},
 		},
-		// #ifndef MP
-		// 标题栏input搜索框点击
-		onNavigationBarSearchInputClicked: async function(e) {
-			this.$api.msg('点击了搜索框');
-		},
 		//点击导航栏 buttons 时触发
-		onNavigationBarButtonTap(e) {
-			const index = e.index;
-			if (index === 0) {
-				this.$api.msg('点击了扫描');
-			} else if (index === 1) {
-				// #ifdef APP-PLUS
-				const pages = getCurrentPages();
-				const page = pages[pages.length - 1];
-				const currentWebview = page.$getAppWebview();
-				currentWebview.hideTitleNViewButtonRedDot({
-					index
-				});
-				// #endif
-				uni.navigateTo({
-					url: '/pages/notice/notice'
-				})
-			}
+		onNavigationBarButtonTap() {
+			uni.navigateTo({
+				url: `/pages/Set/index`
+			})
 		}
-		// #endif
 	}
 </script>
 
@@ -144,9 +177,6 @@
 		}
 	}
 	/* #endif */
-	page {
-		background: #f5f5f5;
-	}
 	.m-t{
 		margin-top: 16upx;
 	}

@@ -74,6 +74,7 @@ const request = (url, options, isLoading = true) => {
         resolve(resp.data);
       },
       fail(error) {
+				console.log('error:::', error);
 				Vue.prototype.$toast(`请求超时`);
 				resolve(false)
       },

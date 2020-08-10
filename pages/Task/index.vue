@@ -60,20 +60,26 @@
 
 		onLoad() {
 			this.loadData();
-			// this.$Service.getTaskList({tester: '1'}).then((resp) => {
-			// 	if (!resp || !resp.code) return;
-			// 	console.log('resp.data:::', resp.data)
-			// 	this.taskList = resp.data
-			// })
+			// this.getTaskList()
 		},
 		methods: {
+			/**
+			 * 获取任务列表
+			 */
+			getTaskList() {
+				this.$Service.getTaskList({tester: '1'}).then((resp) => {
+					if (!resp || !resp.code) return;
+					console.log('resp.data:::', resp.data)
+					this.taskList = resp.data
+				})
+			},
 			/**
 			 * 转到task测试页面
 			 */
 			toTaskTestPage(item) {
-				console.log('转到task测试页面:::', item);
+				Object.assign(item, {pageTitle: '测试'})
 				uni.navigateTo({
-					url: `/pages/Test/index?${this.$stringify(item)}`
+					url: `/pages/common/Details?${this.$stringify(item)}`
 				})
 			},
 			/**

@@ -2,12 +2,12 @@
 	<view class="item-card" :style="{height, marginTop}" @click="clickCard">
 		<view class="item-card-left">
 			<text class="tit">{{title}}</text>
-			<text class="tit2" v-if="subTitle">{{subTitle}}</text>
-			<text class="tit2" v-if="desc">{{desc}}</text>
+			<text class="sub-title" v-if="subTitle">{{subTitle}}</text>
+			<text class="desc" v-if="desc">{{desc}}</text>
 		</view>
 		<view class="item-card-right">
 			<text class="date" v-if="date">{{date}}</text>
-			<text class="tit3" v-if="device">{{device}}</text>
+			<text class="sub-title" v-if="device">{{device}}</text>
 			<text class="yticon icon-you"></text>
 		</view>
 	</view>
@@ -87,12 +87,12 @@
 			color: #font-color-dark;
 			line-height: 1.3;
 		}
-		.tit2{
-			font-size: $font-size-sm;
+		.sub-title{
+			font-size: $font-size-base;
 			color: $font-color-light;
 		}
-		.tit3{
-			font-size: $font-size-base -2upx;
+		.desc{
+			font-size: $font-size-base;
 			color: $font-color-light;
 		}
 		.icon-you{

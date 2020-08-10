@@ -13,5 +13,12 @@ module.exports = {
 				'wh-ui': resolve('components')
 			}
 		}
-	}
+	},
+	// proxy: {
+	// 	"/api": {
+	// 		target: 'http://ecm.lanntu.top',
+	// 		changeOrigin: true,
+	// 		ws: true
+	// 	}
+	// }
 }

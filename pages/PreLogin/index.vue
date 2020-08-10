@@ -22,9 +22,8 @@
 		methods: {
 			toLoginPage(mode) {
 				console.log('mode:::', mode);
-				this.$navTo({
-					url: '/pages/Login/index',
-					param: { mode }
+				uni.navigateTo({
+					url: `/pages/Login/index?${this.$stringify({mode})}`,
 				})
 			}
 		}

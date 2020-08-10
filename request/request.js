@@ -33,6 +33,12 @@ const checkStatus = (response) => {
 
 
 const request = (url, options, isLoading = true) => {
+	const Authorization = uni.getStorageSync('Authorization')
+	if (url !== 'admin/auth/login' && !Authorization) {
+		uni.reLaunch({ url: '/pages/PreLogin/index' });
+		Vue.prototype.$toast('登录失效,请重新登录');
+		return
+	} 
   const defaultOptions = {
     method: 'GET',
     isErrorTip: true
@@ -43,17 +49,27 @@ const request = (url, options, isLoading = true) => {
 	/**
 	 * 展示网络请求得loading
 	 */
-	if (isLoading) uni.showLoading({title: 'loading', mask: true})
+	if (isLoading) uni.showLoading({title: 'loading', mask: true});
 	
+	/**
+	 * 登录成功后的请求添加头信息Authorization
+	 */
+	const header = {};
+	if (url !== 'admin/auth/login') Object.assign(header, {Authorization})
   return new Promise((resolve, reject) => {
     uni.request({
-      url: `http://192.168.202.248:8080/${url}`,
+      url: `http://ecm.lanntu.top/${url}`,
       ...defaultOptions,
+			header,
       success(resp) {
-        console.log('request:::resp:::', resp);
+        console.log(`${url}:::`, resp);
         checkStatus(resp);
-				if (resp.data.code === '1000') {
+				if (resp.data.code === 1000) {
 					Vue.prototype.$toast(`${resp.data.msg ? resp.data.msg : '请求失败'}`);
+				}
+				if (url === 'admin/auth/login' && resp.data.code === 1) {
+					console.log('resp.data.token:::', resp.data.data.token);
+					uni.setStorageSync('Authorization', resp.data.data.token);
 				}
         resolve(resp.data);
       },

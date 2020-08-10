@@ -53,19 +53,11 @@ const showToast = (msg = '', verticalAlign = 'top', duration = 'long') => {
 	)
 };
 
-const navTo = (params) => {
-	const fullParams = {param: {}, ...params};
-	uni.navigateTo({
-		...fullParams,
-		url: `${fullParams.url}?${stringify(fullParams.param)}`
-	})
-};
-
 Vue.config.productionTip = false
 Vue.prototype.$fire = new Vue();
 Vue.prototype.$store = store;
 Vue.prototype.$api = {msg, json, prePage};
-Vue.prototype.$navTo = navTo;
+Vue.prototype.$stringify = stringify;
 Vue.prototype.$toast = showToast;
 Vue.prototype.$Service = service;
 

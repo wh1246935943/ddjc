@@ -22,106 +22,60 @@
 				<text class="num">{{swiperLength}}</text>
 			</view>
 		</view>
-
 		<!-- 任务列表 -->
-		<view class="f-header m-t">
-			<view class="tit-box">
-				<text class="tit">任务一</text>
-				<text class="tit2">西安变电站</text>
-				<text class="tit2">TV测试</text>
-			</view>
-			<view>
-				<text class="tit3">开关柜</text>
-				<text class="yticon icon-you"></text>
-			</view>
+		<view v-if="taskList.length">
+			<item-card
+				v-for="(item, index) in taskList"
+				:key="index"
+				v-bind="{...item}"
+				@click="toTaskTestPage(item)"
+			></item-card>
 		</view>
-		<view class="f-header m-t">
-			<view class="tit-box">
-				<text class="tit">任务一</text>
-				<text class="tit2">西安变电站</text>
-				<text class="tit2">TV测试</text>
-			</view>
-			<view>
-				<text class="tit3">开关柜</text>
-				<text class="yticon icon-you"></text>
-			</view>
-		</view>
-		<view class="f-header m-t">
-			<view class="tit-box">
-				<text class="tit">任务一</text>
-				<text class="tit2">西安变电站</text>
-				<text class="tit2">TV测试</text>
-			</view>
-			<view>
-				<text class="tit3">开关柜</text>
-				<text class="yticon icon-you"></text>
-			</view>
-		</view>
-		<view class="f-header m-t">
-			<view class="tit-box">
-				<text class="tit">任务一</text>
-				<text class="tit2">西安变电站</text>
-				<text class="tit2">TV测试</text>
-			</view>
-			<view>
-				<text class="tit3">开关柜</text>
-				<text class="yticon icon-you"></text>
-			</view>
-		</view>
-		<view class="f-header m-t">
-			<view class="tit-box">
-				<text class="tit">任务一</text>
-				<text class="tit2">西安变电站</text>
-				<text class="tit2">TV测试</text>
-			</view>
-			<view>
-				<text class="tit3">开关柜</text>
-				<text class="yticon icon-you"></text>
-			</view>
-		</view>
-		<view class="f-header m-t">
-			<view class="tit-box">
-				<text class="tit">任务一</text>
-				<text class="tit2">西安变电站</text>
-				<text class="tit2">TV测试</text>
-			</view>
-			<view>
-				<text class="tit3">开关柜</text>
-				<text class="yticon icon-you"></text>
-			</view>
-		</view>
-		<view class="f-header m-t">
-			<view class="tit-box">
-				<text class="tit">任务一</text>
-				<text class="tit2">西安变电站</text>
-				<text class="tit2">TV测试</text>
-			</view>
-			<view>
-				<text class="tit3">开关柜</text>
-				<text class="yticon icon-you"></text>
-			</view>
-		</view>
-		<item-card></item-card>
+		<!-- 缺省图 -->
+		<empty-box top="300" v-else></empty-box>
 	</view>
 </template>
 
 <script>
-	import { ItemCard } from 'wh-ui'
+	import { ItemCard, EmptyBox } from 'wh-ui'
 	export default {
-		components:{ ItemCard },
+		components:{ ItemCard, EmptyBox },
 		data() {
 			return {
 				titleNViewBackground: '',
 				swiperCurrent: 0,
 				swiperLength: 0,
-				carouselList: []
+				carouselList: [],
+				taskList: [
+					{title: '测试3', subTitle: '西安测试1', desc: '4323', device: '开关'},
+					{title: '测试1', subTitle: '西安测试1', desc: '4323', device: '开关'},
+					{title: '测试1', subTitle: '西安测试1', desc: '4323', device: '开关'},
+					{title: '测试1', subTitle: '西安测试1', desc: '4323', device: '开关'},
+					{title: '测试1', subTitle: '西安测试1', desc: '4323', device: '开关'},
+					{title: '测试2', subTitle: '西安测试2', desc: '11242342321212', device: '开关'},
+					{title: '测试3', subTitle: '西安测试3', desc: '112发到付顺丰21212', device: '开关'}
+				]
 			};
 		},
 
 		onLoad() {
 			this.loadData();
+			// this.$Service.getTaskList({tester: '1'}).then((resp) => {
+			// 	if (!resp || !resp.code) return;
+			// 	console.log('resp.data:::', resp.data)
+			// 	this.taskList = resp.data
+			// })
 		},
 		methods: {
+			/**
+			 * 转到task测试页面
+			 */
+			toTaskTestPage(item) {
+				console.log('转到task测试页面:::', item);
+				uni.navigateTo({
+					url: `/pages/Test/index?${this.$stringify(item)}`
+				})
+			},
 			/**
 			 * 请求静态数据只是为了代码不那么乱
 			 * 分次请求未作整合
@@ -143,7 +97,7 @@
 				//测试数据没有写id，用title代替
 				let id = item.title;
 				uni.navigateTo({
-					url: `/pages/product/product?id=${id}`
+					url: `/pages/product/product?${this.$stringify({id})}`
 				})
 			},
 		},
@@ -177,6 +131,9 @@
 		}
 	}
 	/* #endif */
+	.container{
+		position: relative;
+	}
 	.m-t{
 		margin-top: 16upx;
 	}

@@ -1,5 +1,5 @@
 <template>
-	<view class="item-card" :style="{height, marginTop}">
+	<view class="item-card" :style="{height, marginTop}" @click="clickCard">
 		<view class="item-card-left">
 			<text class="tit">{{title}}</text>
 			<text class="tit2" v-if="subTitle">{{subTitle}}</text>
@@ -46,7 +46,9 @@
 			}
 		},
 		methods: {
-			// ...
+			clickCard() {
+				this.$emit('click')
+			}
 		}
 	}
 </script>
@@ -57,6 +59,9 @@
 		align-items:center;
 		padding: 6upx 30upx 8upx;
 		background: #fff;
+		&:active{
+			background-color: #f3f3f3
+		}
 		.item-card-left{
 			flex: 1;
 			display: flex;

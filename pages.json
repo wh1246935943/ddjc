@@ -38,6 +38,12 @@
 			}
 		},
 		{
+			"path": "pages/Test/index",
+			"style": {
+				"navigationBarTitleText": "测试"
+			}
+		},
+		{
 			"path": "pages/Data/index",
 			"style": {
 				"app-plus": {
@@ -187,7 +193,7 @@
 				"navigationBarTitleText": "商品列表"
 			}
 		}
-	],
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "#fff",
 		"navigationBarTitleText": "带电检测",

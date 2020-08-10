@@ -64,8 +64,8 @@
 		},
 		onLoad(option){
 			this.mode = option.mode;
-			this.username = '123';
-			this.password = '1234'
+			this.username = 'admin';
+			this.password = '123456'
 		},
 		methods: {
 			...mapMutations(['login']),
@@ -88,8 +88,9 @@
 				}).then((resp) => {
 					this.isLoading = false
 					console.log('login:::', resp);
+					if (!resp || !resp.code) return;
+					uni.switchTab({url: '/pages/Task/index'})
 				})
-				// uni.switchTab({url: '/pages/Task/index'})
 			}
 		},
 

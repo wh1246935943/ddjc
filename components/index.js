@@ -5,3 +5,4 @@ export { default as MixListCell } from './mix-list-cell.vue';
 export { default as UniNumberBox } from './uni-number-box.vue';
 export { default as UploadImages } from './upload-images.vue';
 export { default as ItemCard } from './item-card/item-card.vue';
+export { default as EmptyBox } from './empty-box/empty-box.vue';

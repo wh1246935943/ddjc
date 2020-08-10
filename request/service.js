@@ -1,16 +1,23 @@
 import request from './request.js';
 import { stringify } from 'qs';
-import { sha256 } from 'js-sha256';
+var md5 = require('md5');
 
 export default class Service {
-  // 登录系统账号
+  /**
+	 * 登录
+	 */
   login(param) {
-    Object.assign(param, {password: sha256(param.password)})
+    Object.assign(param, {password: md5(param.password)})
     return request('admin/auth/login', {
       data: param,
       method: 'POST'
     }, false)
-  }
+  };
+	/**
+	 * 获取任务列表
+	 */
+	getTaskList(param) {
+	  return request(`admin/task/all?${stringify(param)}`)
+	}
 }
-
-  
+ 

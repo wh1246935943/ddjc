@@ -78,7 +78,7 @@
 			 */
 			toTaskTestPage(item) {
 				uni.navigateTo({
-					url: `/pages/Task/Test?${this.$stringify(item)}`
+					url: `/pages/Task/InfTemp?${this.$stringify(item)}`
 				})
 			},
 			/**

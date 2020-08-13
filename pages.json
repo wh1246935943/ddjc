@@ -48,6 +48,21 @@
 			}
 		},
 		{
+			"path" : "pages/Task/InfTemp",
+			"style" : {
+				"navigationBarTitleText": "红外测温",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"text": "完成",
+							"fontSize": "16",
+							"background": "rgba(0,0,0,0)"
+						}]
+					}
+				}
+			}
+		},
+		{
 			"path": "pages/Set/index",
 			"style": {
 				"navigationBarTitleText": "设置"

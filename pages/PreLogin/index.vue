@@ -23,7 +23,7 @@
 			toLoginPage(mode) {
 				console.log('mode:::', mode);
 				uni.navigateTo({
-					url: `/pages/Login/index?${this.$stringify({mode})}`,
+					url: `/pages/Login/index?mode=${mode}`,
 				})
 			}
 		}

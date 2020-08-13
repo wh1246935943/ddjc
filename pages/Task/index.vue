@@ -60,15 +60,15 @@
 
 		onLoad() {
 			this.loadData();
-			// this.getTaskList()
+			this.getTaskList()
 		},
 		methods: {
 			/**
 			 * 获取任务列表
 			 */
 			getTaskList() {
-				this.$Service.getTaskList({tester: '1'}).then((resp) => {
-					if (!resp || !resp.code) return;
+				this.$Service.getTaskList({tester: '6046ea094d554e548ac780012b3ae139'}).then((resp) => {
+					if (!resp || !resp.success) return;
 					console.log('resp.data:::', resp.data)
 					this.taskList = resp.data
 				})
@@ -77,9 +77,8 @@
 			 * 转到task测试页面
 			 */
 			toTaskTestPage(item) {
-				Object.assign(item, {pageTitle: '测试'})
 				uni.navigateTo({
-					url: `/pages/common/Details?${this.$stringify(item)}`
+					url: `/pages/Task/Test?${this.$stringify(item)}`
 				})
 			},
 			/**
@@ -103,7 +102,7 @@
 				//测试数据没有写id，用title代替
 				let id = item.title;
 				uni.navigateTo({
-					url: `/pages/product/product?${this.$stringify({id})}`
+					url: `/pages/product/product?id=${id}`
 				})
 			},
 		},

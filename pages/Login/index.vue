@@ -32,6 +32,14 @@
 							@input="inputChange"
 						/>
 					</view>
+					<view class="remember-pwd">
+						<view class="check-box" @click="() => isRememberPwd = !isRememberPwd">
+							<view class="icon-box">
+								<icon type="success_no_circle" color="#1f9689" v-if="isRememberPwd" />
+							</view>
+							<view>记住密码</view>
+						</view>
+					</view>
 					<button
 						form-type="submit"
 						:disabled="isLoading"
@@ -40,13 +48,6 @@
 					>登录</button>
 				</form>
 			</view>
-			<view class="forget-section">
-				忘记密码?
-			</view>
-		</view>
-		<view class="register-section">
-			还没有账号?
-			<text @click="toRegist">马上注册</text>
 		</view>
 	</view>
 </template>
@@ -56,19 +57,17 @@
 	export default{
 		data(){
 			return {
-				username: '',
-				password: '',
+				username: 'tester1',
+				password: '123456',
 				mode: '',
-				isLoading: false,
+				isRememberPwd: uni.getStorageSync('isRememberPwd'),
+				isLoading: false
 			}
 		},
 		onLoad(option){
 			this.mode = option.mode;
-			this.username = 'admin';
-			this.password = '123456'
 		},
 		methods: {
-			...mapMutations(['login']),
 			inputChange(e){
 				const key = e.currentTarget.dataset.key;
 				this[key] = e.detail.value;
@@ -88,7 +87,11 @@
 				}).then((resp) => {
 					this.isLoading = false
 					console.log('login:::', resp);
-					if (!resp || !resp.code) return;
+					if (!resp || !resp.success) return;
+					uni.setStorage({
+						key: 'isRememberPwd',
+						data: this.isRememberPwd
+					})
 					uni.switchTab({url: '/pages/Task/index'})
 				})
 			}
@@ -185,7 +188,6 @@
 		background:$page-color-light;
 		height: 120upx;
 		border-radius: 4px;
-		margin-bottom: 50upx;
 		&:last-child{
 			margin-bottom: 0;
 		}
@@ -202,36 +204,40 @@
 			width: 100%;
 		}	
 	}
-
+	.remember-pwd{
+		margin: 30upx 0 50upx 0;
+		text-align: end;
+		.check-box{
+			display: inline-flex;
+			align-items: center;
+			position: relative;
+			.icon-box{
+				display: inline-flex;
+				justify-content: center;
+				align-items: center;
+				padding: 5upx;
+				margin-right: 7upx;
+				border: 3upx solid $base-color;
+				border-radius: 10upx;
+				transform: scale(0.7);
+				height: 50upx;
+				width: 50upx;
+				position: absolute;
+				top: 0;
+				left: -55upx;
+			}
+		}
+	}
 	.confirm-btn{
 		width: 630upx;
 		height: 76upx;
 		line-height: 76upx;
 		border-radius: 50px;
-		margin-top: 70upx;
 		background: $uni-color-primary;
 		color: #fff;
 		font-size: $font-size-base;
 		&:after{
 			border-radius: 100px;
-		}
-	}
-	.forget-section{
-		font-size: $font-size-sm+2upx;
-		color: $base-color;
-		text-align: center;
-		margin-top: 40upx;
-	}
-	.register-section{
-		position:absolute;
-		left: 0;
-		bottom: 50upx;
-		width: 100%;
-		font-size: $font-size-sm+2upx;
-		text-align: center;
-		text{
-			color: $base-color;
-			margin-left: 10upx;
 		}
 	}
 </style>

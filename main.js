@@ -57,9 +57,10 @@ Vue.config.productionTip = false
 Vue.prototype.$fire = new Vue();
 Vue.prototype.$store = store;
 Vue.prototype.$api = {msg, json, prePage};
-Vue.prototype.$stringify = stringify;
+Vue.prototype.$stringify = (param) => `routerParam=${JSON.stringify(param)}`;
 Vue.prototype.$toast = showToast;
 Vue.prototype.$Service = service;
+Vue.prototype.$windowWidth = uni.getSystemInfoSync().windowWidth;
 
 App.mpType = 'app';
 

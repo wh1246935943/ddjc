@@ -62,19 +62,19 @@ const request = (url, options, isLoading = true) => {
       ...defaultOptions,
 			header,
       success(resp) {
-        console.log(`${url}:::`, resp);
+        console.log(`success:::${url}:::`, resp);
         checkStatus(resp);
+				resp.data.success = resp.data.code === 1;
 				if (resp.data.code === 1000) {
 					Vue.prototype.$toast(`${resp.data.msg ? resp.data.msg : '请求失败'}`);
 				}
 				if (url === 'admin/auth/login' && resp.data.code === 1) {
-					console.log('resp.data.token:::', resp.data.data.token);
 					uni.setStorageSync('Authorization', resp.data.data.token);
 				}
         resolve(resp.data);
       },
       fail(error) {
-				console.log('error:::', error);
+				console.log(`fail:::${url}:::`, error);
 				Vue.prototype.$toast(`请求超时`);
 				resolve(false)
       },

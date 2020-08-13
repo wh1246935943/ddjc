@@ -59,9 +59,8 @@
 			 * 跳转到已测试数据详情页面
 			 */
 			toTaskDetail(item) {
-				Object.assign(item, {pageTitle: '数据详情'});
 				uni.navigateTo({
-					url: `/pages/common/Details?${this.$stringify(item)}`
+					url: `/pages/Data/Details?${this.$stringify(item)}`
 				})
 			}
 		},

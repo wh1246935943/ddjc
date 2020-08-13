@@ -1,5 +1,5 @@
 <template>
-    <view class="filter-wrapper" :style="{ height: height + 'rpx', top: top,'border-top':border?'1rpx solid #f2f2f2':'none' }" @touchmove.stop.prevent="discard">
+    <view class="filter-wrapper" :style="{ height: height + 'upx', top: top,'border-top':border?'1upx solid #f2f2f2':'none' }" @touchmove.stop.prevent="discard">
         <view class="inner-wrapper">
             <view class="mask" :class="showMask ? 'show' : 'hide'" @tap="tapMask"></view>
             <view class="navs">
@@ -11,7 +11,7 @@
 
                 <!-- <view class="date-wrapper">
                     <picker mode="date" @change="handleDate">
-                        <view class="date c-flex-align" :style="{ height: height + 'rpx' }" @click="dateClick">
+                        <view class="date c-flex-align" :style="{ height: height + 'upx' }" @click="dateClick">
                             <view>{{ selDate }}</view>
                             <image src="https://i.loli.net/2020/07/15/xjVSvzWcH9NO7al.png" mode="" class="icon-triangle"></image>
                         </view>
@@ -138,7 +138,7 @@ export default {
 
 <style lang="scss" scoped>
 page {
-    font-size: 28rpx;
+    font-size: 28upx;
 }
 .c-flex-align {
     display: flex;
@@ -153,20 +153,21 @@ page {
 .filter-wrapper {
     // position: fixed;
     left: 0;
-    width: 100%;
+    // width: 100%;
+		display: inline-block;
     z-index: 999;
     .inner-wrapper {
         // position: relative;
         .navs {
             position: relative;
-            height: 110rpx;
-            padding: 0 40rpx;
+            height: 110upx;
+            padding: 0 80upx 0 20upx;
             display: flex;
             align-items: center;
             justify-content: space-between;
             background-color: #fff;
-            border-bottom: 2rpx solid #f5f6f9;
-            color: #8b9aae;
+            border-bottom: 2upx solid #f5f6f9;
+            color: $base-color;
             z-index: 999;
             box-sizing: border-box;
             & > view {
@@ -186,7 +187,7 @@ page {
         .mask {
             z-index: 666;
             position: fixed;
-            top: calc(var(--status-bar-height) + 44px);
+            top: 110upx;
             left: 0;
             right: 0;
             bottom: 0;
@@ -201,20 +202,20 @@ page {
         }
         .popup {
             position: relative;
-            max-height: 500rpx;
+            max-height: 500upx;
             background-color: #fff;
-            border-bottom-left-radius: 20rpx;
-            border-bottom-right-radius: 20rpx;
+            border-bottom-left-radius: 20upx;
+            border-bottom-right-radius: 20upx;
             overflow: scroll;
             z-index: 999;
             transition: all 3s linear;
             opacity: 0;
             display: none;
             .item-opt {
-                height: 100rpx;
-                padding: 0 40rpx;
+                height: 100upx;
+                padding: 0 20upx;
                 color: #8b9aae;
-                border-bottom: 2rpx solid #f5f6f9;
+                border-bottom: 2upx solid #f5f6f9;
             }
             .actOpt {
                 color: $base-color;
@@ -223,9 +224,9 @@ page {
                 &::after {
                     content: '✓';
                     font-weight: bold;
-                    font-size: 36rpx;
+                    font-size: 36upx;
                     position: absolute;
-                    right: 40rpx;
+                    right: 20upx;
                 }
             }
         }
@@ -236,9 +237,9 @@ page {
     }
 
     .icon-triangle {
-        width: 16rpx;
-        height: 16rpx;
-        margin-left: 10rpx;
+        width: 16upx;
+        height: 16upx;
+        margin-left: 20upx;
     }
 }
 </style>

@@ -36,7 +36,6 @@
 		 * 点击导航栏完成按钮
 		 */
 		onNavigationBarButtonTap() {
-			if (this.item.pageTitle === '数据详情') return
 			this.$toast('完成')
 		}
 	}

@@ -6,3 +6,4 @@ export { default as UniNumberBox } from './uni-number-box.vue';
 export { default as UploadImages } from './upload-images.vue';
 export { default as ItemCard } from './item-card/item-card.vue';
 export { default as EmptyBox } from './empty-box/empty-box.vue';
+export { default as UniFab } from './uni-fab/uni-fab.vue';

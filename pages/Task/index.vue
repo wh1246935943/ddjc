@@ -46,15 +46,7 @@
 				swiperCurrent: 0,
 				swiperLength: 0,
 				carouselList: [],
-				taskList: [
-					{title: '测试3', subTitle: '西安测试1', desc: '4323', device: '开关'},
-					{title: '测试1', subTitle: '西安测试1', desc: '4323', device: '开关'},
-					{title: '测试1', subTitle: '西安测试1', desc: '4323', device: '开关'},
-					{title: '测试1', subTitle: '西安测试1', desc: '4323', device: '开关'},
-					{title: '测试1', subTitle: '西安测试1', desc: '4323', device: '开关'},
-					{title: '测试2', subTitle: '西安测试2', desc: '11242342321212', device: '开关'},
-					{title: '测试3', subTitle: '西安测试3', desc: '112发到付顺丰21212', device: '开关'}
-				]
+				taskList: []
 			};
 		},
 
@@ -77,8 +69,9 @@
 			 * 转到task测试页面
 			 */
 			toTaskTestPage(item) {
+				const path = item.sensorTypeList[0].name === '红外测温' ? 'InfTemp' : 'Test'
 				uni.navigateTo({
-					url: `/pages/Task/InfTemp?${this.$stringify(item)}`
+					url: `/pages/Task/${path}?${this.$stringify(item)}`
 				})
 			},
 			/**

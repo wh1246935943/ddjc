@@ -11,9 +11,9 @@
 				</view>
 			</view>
 		</view>
-		<item-card height="110upx" title="传感器配置" />
-		<item-card height="110upx" marginTop="2upx" title="网络参数配置" />
-		<item-card height="110upx" marginTop="2upx" title="检测参数配置" />
+		<item-card height="110upx" taskName="传感器配置" />
+		<item-card height="110upx" marginTop="2upx" taskName="网络参数配置" />
+		<item-card height="110upx" marginTop="2upx" taskName="检测参数配置" />
 		<view class="list-cell log-out-btn" @click="toLogout">
 			<text class="cell-tit">退出登录</text>
 		</view>

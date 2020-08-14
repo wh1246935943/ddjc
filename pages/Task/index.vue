@@ -37,7 +37,8 @@
 </template>
 
 <script>
-	import { ItemCard, EmptyBox } from 'wh-ui'
+	import { ItemCard, EmptyBox } from 'wh-ui';
+	import lodash from 'lodash';
 	export default {
 		components:{ ItemCard, EmptyBox },
 		data() {
@@ -69,9 +70,40 @@
 			 * 转到task测试页面
 			 */
 			toTaskTestPage(item) {
-				const path = item.sensorTypeList[0].name === '红外测温' ? 'InfTemp' : 'Test'
+				/**
+				 * 校验选中的任务中是否存在该必要的属性
+				 */
+				if (!lodash.hasIn(item, 'sensorTypeList[0].name')) {
+					this.$toast('该测试任务数据中不包含任何传感器')
+					return
+				};
+				let pathTarget = '';
+				/**
+				 * 拿到当前选中的任务的第一个传感器属性名
+				 */
+				const selectTypeName = item.sensorTypeList[0].name;
+				/**
+				 * 传感器列表中第一条数据存在于testPageTypeNames数组中
+				 * 则跳转到Test/index页面的
+				 */
+				const testPageTypeNames = ['空声AA', '地电压TEV', '特高频UHF', '高频HFCT', '接触式超声波AE'];
+				/**
+				 * 传感器列表中第一条数据存在于InfTempPageTypeNames数组中
+				 * InfTemp/index页面的
+				 */
+				const InfTempPageTypeNames = ['红外测温']
+				if (testPageTypeNames.includes(selectTypeName)) pathTarget = 'Test';
+				if (InfTempPageTypeNames.includes(selectTypeName)) pathTarget = 'InfTemp';
+				/**
+				 * 除此之外的任何条件都阻止页面跳转
+				 */
+				if (!pathTarget) {
+					this.$toast('用于该传感器类型的测试功能正在完善中')
+					return
+				};
+
 				uni.navigateTo({
-					url: `/pages/Task/${path}?${this.$stringify(item)}`
+					url: `/pages/Task/${pathTarget}?routerParam=${JSON.stringify(item)}`
 				})
 			},
 			/**

@@ -60,7 +60,7 @@
 			 */
 			toTaskDetail(item) {
 				uni.navigateTo({
-					url: `/pages/Data/Details?${this.$stringify(item)}`
+					url: `/pages/Data/Details?routerParam=${JSON.stringify(item)}`
 				})
 			}
 		},

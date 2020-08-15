@@ -35,10 +35,10 @@ const checkStatus = (response) => {
 const request = (url, options, isLoading = true) => {
 	const Authorization = uni.getStorageSync('Authorization')
 	if (url !== 'admin/auth/login' && !Authorization) {
-		uni.reLaunch({ url: '/pages/PreLogin/index' });
+		uni.reLaunch({ url: '/pages/Login/index' });
 		Vue.prototype.$toast('登录失效,请重新登录');
 		return
-	} 
+	};
   const defaultOptions = {
     method: 'GET',
     isErrorTip: true

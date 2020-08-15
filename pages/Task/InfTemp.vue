@@ -57,7 +57,7 @@
 									relPath: resp.data.path,
 									position: '',
 									heightTemp: ''
-								})						
+								})
 							}
 						})
 						// const formData = new FormData();

@@ -39,7 +39,7 @@
 				    	if(e.confirm){
 				    		this.logout();
 				    		uni.reLaunch({
-				    			url: '/pages/PreLogin/index'
+				    			url: '/pages/Login/index'
 				    		})
 				    	}
 				    }

@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<view class="left-bottom-sign"></view>
-		<view class="back-btn yticon icon-zuojiantou-up" @click="navBack"></view>
+		<!-- <view class="back-btn yticon icon-zuojiantou-up" @click="navBack"></view> -->
 		<view class="right-top-sign"></view>
 		<!-- 设置白色背景防止软键盘把下部绝对定位元素顶上来盖住输入框等 -->
 		<view class="wrapper">
@@ -42,7 +42,7 @@
 					</view>
 					<button
 						form-type="submit"
-						:disabled="isLoading"
+						:disabled="disabled"
 						:loading="isLoading"
 						class="confirm-btn"
 					>登录</button>
@@ -54,18 +54,35 @@
 
 <script>
 	import { mapMutations } from 'vuex';
+	import lodash from 'lodash';
 	export default{
 		data(){
 			return {
-				username: 'tester1',
-				password: '123456',
-				mode: '',
-				isRememberPwd: uni.getStorageSync('isRememberPwd'),
+				username: '',
+				password: '',
+				isRememberPwd: false,
 				isLoading: false
 			}
 		},
-		onLoad(option){
-			this.mode = option.mode;
+		computed: {
+			/**
+			 * 登录按钮状态：
+			 * 账号密码都为空或者正在登录中时登录按钮不可点击
+			 */
+			disabled() {
+				let isForm = this.username && this.password
+				if (!isForm) return true;
+				if (this.isLoading) return true;
+				return false
+			}
+		},
+		onLoad(){
+			const loginInfo = uni.getStorageSync('login_info');
+			if (lodash.hasIn(loginInfo, 'password')) {
+				this.isRememberPwd = true;
+				this.username = loginInfo.username;
+				this.password = loginInfo.password
+			}
 		},
 		methods: {
 			inputChange(e){
@@ -79,7 +96,7 @@
 				this.$api.msg('去注册');
 			},
 			toLogin(){
-				const {username, password, mode} = this;
+				const {username, password} = this;
 				this.isLoading = true;
 				this.$Service.login({
 					username,
@@ -88,10 +105,14 @@
 					this.isLoading = false
 					console.log('login:::', resp);
 					if (!resp || !resp.success) return;
-					uni.setStorage({
-						key: 'isRememberPwd',
-						data: this.isRememberPwd
-					})
+					if (this.isRememberPwd) {
+						uni.setStorage({
+							key: 'login_info',
+							data: {username, password}
+						});
+					} else {
+						uni.removeStorage({key: 'login_info'});
+					}
 					uni.switchTab({url: '/pages/Task/index'})
 				})
 			}

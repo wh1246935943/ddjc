@@ -1,11 +1,11 @@
 {
 	"pages": [
-		{
-			"path": "pages/PreLogin/index",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
+		// {
+		// 	"path": "pages/PreLogin/index",
+		// 	"style": {
+		// 		"navigationStyle": "custom"
+		// 	}
+		// },
 		{
 			"path": "pages/Login/index",
 			"style": {

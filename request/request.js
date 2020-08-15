@@ -55,14 +55,15 @@ const request = (url, options, isLoading = true) => {
 	 * 登录成功后的请求添加头信息Authorization
 	 */
 	const header = {};
-	if (url !== 'admin/auth/login') Object.assign(header, {Authorization})
+	if (url !== 'admin/auth/login') Object.assign(header, defaultOptions.header, {Authorization})
   return new Promise((resolve, reject) => {
     uni.request({
       url: `http://ecm.lanntu.top/${url}`,
       ...defaultOptions,
 			header,
       success(resp) {
-        console.log(`success:::${url}:::`, resp);
+        console.log(`request:::param:::${url}:::`, options);
+        console.log(`success:::back:::${url}:::`, resp);
         checkStatus(resp);
 				resp.data.success = resp.data.code === 1;
 				if (resp.data.code === 1000) {
@@ -74,6 +75,7 @@ const request = (url, options, isLoading = true) => {
         resolve(resp.data);
       },
       fail(error) {
+        console.log(`request:::param:::${url}:::`, options);
 				console.log(`fail:::${url}:::`, error);
 				Vue.prototype.$toast(`请求超时`);
 				resolve(false)

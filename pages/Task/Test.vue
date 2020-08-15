@@ -35,7 +35,6 @@
 			}
 		},
 		onLoad(options) {
-			console.log('options:::', options);
 			const routerParam = JSON.parse(options.routerParam)
 			this.item = routerParam;
 			if (routerParam.sensorTypeList && routerParam.sensorTypeList.length) {

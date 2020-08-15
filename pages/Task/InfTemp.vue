@@ -6,7 +6,7 @@
 			:key="index"
 		>
 			
-			<image :src="item.src" mode="aspectFill"></image>
+			<image :src="item.path" mode="aspectFill"></image>
 			<view class="del-img" @click="delImg(index)"></view>
 			<view class="form-box" data-title="测试位置:">
 				<input v-model="item.position" placeholder="请输入位置" />
@@ -20,22 +20,16 @@
 </template>
 
 <script>
-	import { UniFab } from 'wh-ui'
+	import { UniFab } from 'wh-ui';
+	// import FormData from 'form-data';
 	export default {
 		components: { UniFab },
 		data() {
 			return {
-				imgList: [
-					{
-						src: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2440894352,3814741899&fm=26&gp=0.jpg',
-						position: '',
-						heightTemp: ''
-					}
-				]
+				imgList: []
 			}
 		},
 		onLoad(options) {
-			console.log('options:::', options);
 			const routerParam = JSON.parse(options.routerParam);
 		},
 		methods: {
@@ -45,14 +39,33 @@
 			addImg() {
 				uni.chooseImage({
 					count: 1,
-					sizeType: ['original'],
+					sizeType: ['compressed'],
 					success: ({tempFilePaths, tempFiles}) => {
-						this.imgList.push({
-							src: tempFilePaths[0],
-							file: tempFiles[0],
-							position: '',
-							heightTemp: ''
-						})						
+						uni.uploadFile({
+							url: 'http://ecm.lanntu.top/admin/file/upload',
+							filePath: tempFilePaths[0],
+							name: 'file',
+							header: {
+								Authorization: uni.getStorageSync('Authorization')
+							},
+							success: (uploadFileRes) => {
+								console.log('uploadFileRes:::', uploadFileRes);
+								const resp = JSON.parse(uploadFileRes.data);
+								console.log(resp);
+								this.imgList.push({
+									path: tempFilePaths[0],
+									relPath: resp.data.path,
+									position: '',
+									heightTemp: ''
+								})						
+							}
+						})
+						// const formData = new FormData();
+						// formData.append('file', tempFiles[0]);
+						// console.log(tempFiles, tempFilePaths);
+						// this.$Service.uploadFile({file: tempFiles[0]}).then((resp) => {
+						// 	if (!resp || !resp.success) return;
+						// })
 					}
 				});
 			},

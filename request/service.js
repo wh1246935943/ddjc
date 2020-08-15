@@ -18,6 +18,17 @@ export default class Service {
 	 */
 	getTaskList(param) {
 	  return request(`admin/task/all?${stringify(param)}`)
-	}
+  };
+  /**
+   * 上传图片
+   */
+  uploadFile(param) {
+    return request('admin/file/upload', {
+      data: param,
+      method: 'POST',
+      header: {
+        Accept: 'multipart/form-data'
+      }
+    })
+  };
 }
- 

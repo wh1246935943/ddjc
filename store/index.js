@@ -3,13 +3,15 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+const userInfo = uni.getStorageSync('user_info') || {}
+
 const store = new Vuex.Store({
 	state: {
-		userInfo: {}
+		userInfo
 	},
 	mutations: {
 		SET_SUERINFO: (state, userInfo) => {
-			state.userInfo = userInfo.user.userId;
+			state.userInfo = userInfo
 		},
 		logout(state) {
 			state.hasLogin = false;

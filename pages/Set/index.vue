@@ -4,10 +4,19 @@
 			<image class="bg" src="@static/user-bg.jpg"></image>
 			<view class="user-info-box">
 				<view class="portrait-box">
-					<image class="portrait" src="@static/missing-face.png"></image>
+					<image
+						class="portrait"
+						:src="userInfo.user.avatar"
+						v-if="userInfo.user.avatar"
+					></image>
+					<image
+						class="portrait"
+						src="@static/missing-face.png"
+						 v-else
+					></image>
 				</view>
 				<view class="info-box">
-					<text class="username">{{'wanghao' || '游客'}}</text>
+					<text class="username">{{userInfo.user.username || '游客'}}</text>
 				</view>
 			</view>
 		</view>
@@ -21,13 +30,15 @@
 </template>
 
 <script>
-	import { ItemCard } from 'wh-ui'
-	import { mapMutations } from 'vuex';
+	import { ItemCard } from 'wh-ui';
 	export default {
 		components:{ ItemCard },
+		computed: {
+			userInfo() {
+				return this.$store.state.userInfo
+			}
+		},
 		methods:{
-			...mapMutations(['logout']),
-
 			navTo(url){
 				this.$api.msg(`跳转到${url}`);
 			},
@@ -37,7 +48,6 @@
 				    content: '确定要退出登录么',
 				    success: (e)=>{
 				    	if(e.confirm){
-				    		this.logout();
 				    		uni.reLaunch({
 				    			url: '/pages/Login/index'
 				    		})

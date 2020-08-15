@@ -36,7 +36,7 @@ const request = (url, options, isLoading = true) => {
 	const Authorization = uni.getStorageSync('Authorization')
 	if (url !== 'admin/auth/login' && !Authorization) {
 		uni.reLaunch({ url: '/pages/Login/index' });
-		Vue.prototype.$toast('登录失效,请重新登录');
+		Vue.prototype.$toast('登录已过期,请重新登录');
 		return
 	};
   const defaultOptions = {
@@ -65,10 +65,24 @@ const request = (url, options, isLoading = true) => {
         console.log(`request:::param:::${url}:::`, options);
         console.log(`success:::back:::${url}:::`, resp);
         checkStatus(resp);
+				if (resp.data.code === 1001) {
+					uni.reLaunch({ url: '/pages/Login/index' });
+					Vue.prototype.$toast('登录已过期,请重新登录');
+					return
+				}
+				/**
+				 * 添加接口成功的标识，方便前端统一判断
+				 */
 				resp.data.success = resp.data.code === 1;
+				/**
+				 * 返回异常弹出提示
+				 */
 				if (resp.data.code === 1000) {
 					Vue.prototype.$toast(`${resp.data.msg ? resp.data.msg : '请求失败'}`);
-				}
+				};
+				/**
+				 * 登录成功后设置token
+				 */
 				if (url === 'admin/auth/login' && resp.data.code === 1) {
 					uni.setStorageSync('Authorization', resp.data.data.token);
 				}

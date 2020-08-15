@@ -5,8 +5,7 @@
 			v-for="(item, index) in imgList"
 			:key="index"
 		>
-			
-			<image :src="item.path" mode="aspectFill"></image>
+			<image :src="item.path" mode="aspectFill" @click="previewImage(item.path)"></image>
 			<view class="del-img" @click="delImg(index)"></view>
 			<view class="form-box" data-title="测试位置:">
 				<input v-model="item.position" placeholder="请输入位置" />
@@ -79,6 +78,14 @@
 				    	if(e.confirm) this.$delete(this.imgList, index)
 				    }
 				});
+			},
+			/**
+			 * 预览图片
+			 */
+			previewImage(path) {
+				uni.previewImage({
+					urls: [path]
+				});				
 			}
 		},
 		/**

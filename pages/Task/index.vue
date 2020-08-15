@@ -60,7 +60,8 @@
 			 * 获取任务列表
 			 */
 			getTaskList() {
-				this.$Service.getTaskList({tester: '6046ea094d554e548ac780012b3ae139'}).then((resp) => {
+				const { userInfo } = this.$store.state;
+				this.$Service.getTaskList({tester: userInfo.user.userId}).then((resp) => {
 					if (!resp || !resp.success) return;
 					console.log('resp.data:::', resp.data)
 					this.taskList = resp.data

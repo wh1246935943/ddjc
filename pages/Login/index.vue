@@ -112,7 +112,12 @@
 						});
 					} else {
 						uni.removeStorage({key: 'login_info'});
-					}
+					};
+					uni.setStorage({
+						key: 'user_info',
+						data: resp.data
+					});
+					this.$store.commit('SET_SUERINFO', resp.data)
 					uni.switchTab({url: '/pages/Task/index'})
 				})
 			}

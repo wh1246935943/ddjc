@@ -140,7 +140,7 @@
 				font-size: $font-size-base;
 			}
 			input{
-				border-bottom: 2upx solid $base-color;
+				border-bottom: 1upx solid $base-color;
 				height: 40upx;
 				flex: 1;
 				color: $base-color

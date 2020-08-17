@@ -13,7 +13,7 @@
 				></ren-dropdown-filter>
 			</view>
 		</view>
-		<data-table></data-table>
+		<data-table :isSwitchgear="isSwitchgear" :item="item"></data-table>
 		<chart-box></chart-box>
 	</view>
 </template>
@@ -22,31 +22,37 @@
 	import { RenDropdownFilter } from 'wh-ui';
 	import DataTable from '../common/DataTable.vue';
 	import ChartBox from '../common/ChartBox.vue';
+	const testPageTypeNames = ['空声AA', '地电压TEV', '特高频UHF', '高频HFCT', '接触式超声波AE'];
 	export default {
 		components:{ RenDropdownFilter, DataTable, ChartBox },
 		data() {
 			return {
 				item: {},
-				filterData:[
-					[{ text: '站点名称', value: '' }, { text: '状态1', value: 1 }, { text: '状态2', value: 2 }, { text: '状态3', value: 3 }],
-				],
+				filterData:[],
 				defaultIndex:[0],
-				chartBoxHeight: 0
+				chartBoxHeight: 0,
+				testProjectName: ''
+			}
+		},
+		computed: {
+			isSwitchgear() {
+				return this.item.deviceType === '开关柜' && testPageTypeNames.includes(this.testProjectName)
 			}
 		},
 		onLoad(options) {
-			const routerParam = JSON.parse(options.routerParam)
+			const routerParam = JSON.parse(options.routerParam);
 			this.item = routerParam;
 			if (routerParam.sensorTypeList && routerParam.sensorTypeList.length) {
+				this.testProjectName = routerParam.sensorTypeList[0].name
 				this.filterData = [routerParam.sensorTypeList.map((item, index) => Object.assign(item, {text: item.name, value: index}))]
-			}
+			};
 		},
 		methods: {
 			/**
 			 * 选择测试项目
 			 */
 			onSelected(res){
-				console.log(res)
+				this.testProjectName = res[0][0].name
 			},
 		},
 		/**

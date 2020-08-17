@@ -94,17 +94,6 @@
 			"style": {
 				"navigationBarTitleText": "数据详情"
 			}
-		},
-		{
-			"path": "pages/product/product",
-			"style": {
-				"navigationBarTitleText": "详情展示",
-				"app-plus": {
-					"titleNView": {
-						"type": "transparent"
-					}
-				}
-			}
 		}
 	],
 	"globalStyle": {

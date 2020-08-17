@@ -9,7 +9,7 @@ module.exports = {
 		resolve: {
 			alias: {
 				'@static': resolve('static'),
-				'@utils': resolve('common/utils.js'),
+				'@common': resolve('common'),
 				'wh-ui': resolve('components')
 			}
 		}

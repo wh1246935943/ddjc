@@ -71,7 +71,7 @@
 		},
 		//点击导航栏 搜索 时触发
 		onNavigationBarButtonTap() {
-			this.$api.msg(this.navSearchTxt);
+			this.$toast(this.navSearchTxt);
 		}
 		// #endif
 	}

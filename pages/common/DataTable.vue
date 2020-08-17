@@ -56,7 +56,7 @@
 			 * 点击要测试的点位
 			 */
 			onClicklocation(index, dataIndex, item) {
-				console.log(index, dataIndex, item)
+				this.$emit('onClicklocation', index, dataIndex, item)
 			}
 		}
 	}

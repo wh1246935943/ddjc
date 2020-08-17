@@ -13,7 +13,11 @@
 				></ren-dropdown-filter>
 			</view>
 		</view>
-		<data-table :isSwitchgear="isSwitchgear" :item="item"></data-table>
+		<data-table
+			:isSwitchgear="isSwitchgear"
+			:item="item"
+			@onClicklocation="onClicklocation"
+		></data-table>
 		<chart-box></chart-box>
 	</view>
 </template>
@@ -54,6 +58,12 @@
 			onSelected(res){
 				this.testProjectName = res[0][0].name
 			},
+			/**
+			 * 点击要测试的点位
+			 */
+			onClicklocation(index, dataIndex, item) {
+				this.$set(this.item.deviceList[index], dataIndex, (Math.random()*(0-100) + 100).toFixed(2))
+			}
 		},
 		/**
 		 * 点击导航栏完成按钮

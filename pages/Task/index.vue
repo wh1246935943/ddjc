@@ -39,20 +39,20 @@
 <script>
 	import { ItemCard, EmptyBox } from 'wh-ui';
 	import lodash from 'lodash';
+	import { carouselList } from '@common/json.js'
 	export default {
 		components:{ ItemCard, EmptyBox },
 		data() {
 			return {
-				titleNViewBackground: '',
+				titleNViewBackground: carouselList[0].background,
+				swiperLength: carouselList.length,
+				carouselList: carouselList,
 				swiperCurrent: 0,
-				swiperLength: 0,
-				carouselList: [],
 				taskList: []
 			};
 		},
 
 		onLoad() {
-			this.loadData();
 			this.getTaskList()
 		},
 		methods: {
@@ -107,16 +107,6 @@
 					url: `/pages/Task/${pathTarget}?routerParam=${JSON.stringify(item)}`
 				})
 			},
-			/**
-			 * 请求静态数据只是为了代码不那么乱
-			 * 分次请求未作整合
-			 */
-			async loadData() {
-				let carouselList = await this.$api.json('carouselList');
-				this.titleNViewBackground = carouselList[0].background;
-				this.swiperLength = carouselList.length;
-				this.carouselList = carouselList;
-			},
 			//轮播图切换修改背景色
 			swiperChange(e) {
 				const index = e.detail.current;
@@ -125,12 +115,8 @@
 			},
 			//详情页
 			navToDetailPage(item) {
-				//测试数据没有写id，用title代替
-				let id = item.title;
-				uni.navigateTo({
-					url: `/pages/product/product?id=${id}`
-				})
-			},
+				// ...
+			}
 		},
 		//点击导航栏 buttons 时触发
 		onNavigationBarButtonTap() {
@@ -247,7 +233,7 @@
 		}
 		.tit{
 			font-size: $font-size-base +2upx;
-			color: #font-color-dark;
+			color: $font-color-dark;
 			line-height: 1.3;
 		}
 		.tit2{

@@ -92,9 +92,6 @@
 			navBack() {
 				uni.navigateBack()
 			},
-			toRegist(){
-				this.$api.msg('去注册');
-			},
 			toLogin(){
 				const {username, password} = this;
 				this.isLoading = true;

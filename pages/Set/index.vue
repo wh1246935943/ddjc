@@ -40,7 +40,7 @@
 		},
 		methods:{
 			navTo(url){
-				this.$api.msg(`跳转到${url}`);
+				this.$toast(`跳转到${url}`);
 			},
 			//退出登录
 			toLogout(){

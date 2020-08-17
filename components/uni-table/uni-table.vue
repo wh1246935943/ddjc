@@ -19,11 +19,12 @@
         class="table-body-row"
       >
         <view
-          v-for="(column, index) in columns"
-          :key="index"
-          class="table-body-rowitem"
+          v-for="(column, i) in columns"
+          :key="i"
+          class="table-body-rowitem select-Pos"
           :style="{
             ...Object.assign(
+							column.dataIndex !== 'deviceName' && selectIndex === `${index}${column.dataIndex}` && {borderColor: '#1f9689'},
               {width: `${100/columns.length}%`},
               column.width && {width: column.width}
             )
@@ -54,10 +55,16 @@
 				}
       }
     },
+		data() {
+			return {
+				selectIndex: ''
+			}
+		},
 		methods: {
-      onClicklocation(a, b, c) {
-        if (b === 'deviceName') return;
-        this.$emit('onClicklocation', a, b, c)
+      onClicklocation(index, dataIndex, item) {
+        if (dataIndex === 'deviceName') return;
+				this.selectIndex = `${index}${dataIndex}`;
+        this.$emit('onClicklocation', index, dataIndex, item)
       }
 		}
 	}
@@ -73,7 +80,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 60upx;
+    height: 80upx;
     background: rgba(61,184,171,0.05);
     color: $base-color;
     padding: 0 10upx;
@@ -85,14 +92,14 @@
     width: 100%;
     .table-body-row{
       width: 100%;
-      height: 50upx;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1upx solid #eee;
-      padding: 30upx 0;
+      padding: 10upx 0;
       .table-body-rowitem{
-        line-height: 100%;
+				height: 60upx;
+        line-height: 60upx;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
@@ -101,6 +108,9 @@
           font-size: $font-size-sm + 3upx
         }
       }
+			.select-Pos{
+				border: 1upx solid rgba(0,0,0,0);
+			}
     }
   }
 }

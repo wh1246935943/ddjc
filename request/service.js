@@ -26,9 +26,9 @@ export default class Service {
     return request('admin/file/upload', {
       data: param,
       method: 'POST',
-      header: {
-        Accept: 'multipart/form-data'
-      }
+      // header: {
+      //   'content-type': 'multipart/form-data'
+      // }
     })
   };
 }

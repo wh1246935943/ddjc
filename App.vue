@@ -17,8 +17,11 @@
 						this.login(res.data);
 					}
 				});
-			}
-			
+			};
+			uni.onNetworkStatusChange((res) => {
+				console.log('监听网络状态变化:::', res)
+				this.$store.commit('SET_NETWORK', res)
+			})
 		},
 		onShow: function() {
 			console.log('App Show')

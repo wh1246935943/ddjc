@@ -7,18 +7,29 @@ const userInfo = uni.getStorageSync('user_info') || {}
 
 const store = new Vuex.Store({
 	state: {
-		userInfo
+		userInfo,
+		isNetWork: false,
+		netWorkType: ''
 	},
 	mutations: {
-		SET_SUERINFO: (state, userInfo) => {
-			state.userInfo = userInfo
+		/**
+		 * 更新网络状态
+		 */
+		SET_NETWORK: (state, param) => {
+			state.isNetWork = param.isConnected;
+			state.netWorkType = param.networkType
 		},
-		logout(state) {
-			state.hasLogin = false;
-			state.userInfo = {};
-			uni.removeStorage({  
-				key: 'userInfo'  
-			})
+		/**
+		 * 更新用户信息
+		 */
+		SET_SUERINFO: (state, param) => {
+			state.userInfo = param
+		},
+		/**
+		 * 推出登录
+		 */
+		LOGIN_OUT(state) {
+			// 。。。
 		}
 	},
 	actions: {

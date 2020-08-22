@@ -20,9 +20,9 @@
 				</view>
 			</view>
 		</view>
-		<item-card height="110upx" taskName="传感器配置" />
-		<item-card height="110upx" marginTop="2upx" taskName="网络参数配置" />
-		<item-card height="110upx" marginTop="2upx" taskName="检测参数配置" />
+		<item-card height="110upx" taskName="传感器配置" @click="toSysConfigPage('传感器配置')" />
+		<item-card height="110upx" marginTop="2upx" taskName="网络参数配置" @click="toSysConfigPage('网络参数配置')" />
+		<item-card height="110upx" marginTop="2upx" taskName="检测参数配置" @click="toSysConfigPage('检测参数配置')" />
 		<view class="list-cell log-out-btn" @click="toLogout">
 			<text class="cell-tit">退出登录</text>
 		</view>
@@ -39,21 +39,23 @@
 			}
 		},
 		methods:{
-			navTo(url){
-				this.$toast(`跳转到${url}`);
+			toSysConfigPage(title){
+				uni.navigateTo({
+					url: `/pages/Set/SysConfig?routerParam=${title}`
+				})
 			},
 			//退出登录
 			toLogout(){
 				uni.showModal({
-				    content: '确定要退出登录么',
-				    success: (e)=>{
-				    	if(e.confirm){
-				    		uni.reLaunch({
-				    			url: '/pages/Login/index'
-				    		})
-				    	}
-				    }
-				});
+					content: '确定要退出登录么',
+					success: (e)=>{
+						if(e.confirm){
+							uni.reLaunch({
+								url: '/pages/Login/index'
+							})
+						}
+					}
+				})
 			}
 		}
 	}

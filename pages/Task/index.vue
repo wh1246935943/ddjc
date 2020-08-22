@@ -6,11 +6,17 @@
 			<view class="titleNview-placing"></view>
 			<!-- 背景色区域 -->
 			<view class="titleNview-background" :style="{backgroundColor:titleNViewBackground}"></view>
-			<swiper class="carousel" circular @change="swiperChange">
+			<swiper
+				class="carousel"
+				circular
+				autoplay
+				interval="3000"
+				@change="swiperChange"
+			>
 				<swiper-item
 					v-for="(item, index) in carouselList"
 					:key="index" class="carousel-item"
-					@click="navToDetailPage({title: '轮播广告'})"
+					@click="swiperItemClick(item)"
 				>
 					<image :src="item.src" />
 				</swiper-item>
@@ -114,8 +120,9 @@
 				this.titleNViewBackground = this.carouselList[index].background;
 			},
 			//详情页
-			navToDetailPage(item) {
-				// ...
+			swiperItemClick(item) {
+				console.log(item);
+				plus.runtime.openURL('http://www.baidu.com');
 			}
 		},
 		//点击导航栏 buttons 时触发
@@ -189,6 +196,7 @@
 			width: 100%;
 			height: 100%;
 			border-radius: 10upx;
+			object-fit: cover;
 		}
 	}
 	.swiper-dots {

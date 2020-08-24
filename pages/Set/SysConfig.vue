@@ -7,36 +7,36 @@
 					<input
 						:value="sensor"
 						name="sensor"
-						placeholder="请选择传感器类型"
+						placeholder="请选择"
 						style="pointer-events: none;"
 					/>
 				</view>
 				<view class="form-item" data-title="SSID:">
-					<input name="ssid" placeholder="请输入SSID" />
+					<input :value="uni.getStorageSync('SYS_CONFIG').ssid" name="ssid" placeholder="请输入" />
 				</view>
 				<view class="form-item" data-title="IP:">
-					<input name="ip" placeholder="请输入IP" />
+					<input :value="uni.getStorageSync('SYS_CONFIG').ip" name="ip" placeholder="请输入" />
 				</view>
 				<view class="form-item" data-title="PORT:">
-					<input name="port" placeholder="请输入PORT" />
+					<input :value="uni.getStorageSync('SYS_CONFIG').port" name="port" placeholder="请输入" />
 				</view>
 			</view>
 			<!-- 检测参数配置 -->
 			<view v-if="title === '检测参数配置'" class="form">
 				<view class="form-item" data-title="检出阈值:">
-					<input name="jcfz" placeholder="请输入检出阈值" />
+					<input :value="uni.getStorageSync('SYS_CONFIG').jcfz" name="jcfz" placeholder="请输入" />
 				</view>
 				<view class="form-item" data-title="一般告警阈值:">
-					<input name="jgfz" placeholder="请输入一般告警阈值" />
+					<input :value="uni.getStorageSync('SYS_CONFIG').jgfz" name="jgfz" placeholder="请输入" />
 				</view>
 				<view class="form-item" data-title="严重告警阈值:">
-					<input name="yzjg" placeholder="请输入严重告警阈值" />
+					<input :value="uni.getStorageSync('SYS_CONFIG').yzjg" name="yzjg" placeholder="请输入" />
 				</view>
 			</view>
 			<!-- 网络参数配置 -->
 			<view v-if="title === '网络参数配置'" class="form">
 				<view class="form-item" data-title="后台URL:">
-					<input name="url" placeholder="请输入后台URL" />
+					<input :value="uni.getStorageSync('SYS_CONFIG').url" name="url" placeholder="请输入" />
 				</view>
 			</view>
 			<view class="btns">
@@ -58,15 +58,27 @@
 </template>
 
 <script>
+	const errorMsg = {
+		sensor: '请选择传感器',
+		ssid: '请填写SSID',
+		ip: '请填写IP',
+		port: '请填写PORT',
+		jcfz: '请填写检出阈值',
+		jgfz: '请填写一般告警阈值',
+		yzjg: '请填写严重告警阈值',
+		url: '请填写后台URL'
+	}
 	export default {
 		data() {
 			return {
 				title: '',
 				isLoading: false,
-				sensor: ''
+				sensor: '',
+				uni: uni
 			}
 		},
 		onLoad(options) {
+			this.sensor = uni.getStorageSync('SYS_CONFIG').sensor;
 			uni.setNavigationBarTitle({title: options.routerParam});
 			this.title = options.routerParam;
 		},
@@ -84,7 +96,24 @@
 				})
 			},
 			saveConfig(filesValue) {
-				console.log(filesValue);
+				const param = filesValue.detail.value
+				const keys = Object.keys(param);
+				const {length} = keys;
+				let isPass = true;
+				for (let i = 0; i < length; i++) {
+					if (!param[keys[i]]) {
+						this.$toast(errorMsg[keys[i]])
+						return
+					}
+				};
+				const sysConfig = {};
+				if (uni.getStorageSync('SYS_CONFIG')) {
+					Object.assign(sysConfig, uni.getStorageSync('SYS_CONFIG'))
+				};
+				Object.assign(sysConfig, filesValue.detail.value)
+				uni.setStorageSync('SYS_CONFIG', sysConfig);
+				this.$toast('已保存成功')
+				uni.navigateBack()
 			}
 		}
 	}
@@ -113,6 +142,7 @@
 				color: $base-color;
 				outline: none;
 				text-align: end;
+				padding-right: 20upx
 			}
 		}		
 	}

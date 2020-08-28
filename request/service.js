@@ -22,13 +22,10 @@ export default class Service {
   /**
    * 上传图片
    */
-  uploadFile(param) {
-    return request('admin/file/upload', {
+  uploadTestResult(param) {
+    return request('admin/taskInfo/add', {
       data: param,
       method: 'POST',
-      // header: {
-      //   'content-type': 'multipart/form-data'
-      // }
     })
   };
 }

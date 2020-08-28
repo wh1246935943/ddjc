@@ -23,6 +23,7 @@
 </template>
 
 <script>
+	import lodash from 'lodash';
 	import { RenDropdownFilter } from 'wh-ui';
 	import DataTable from '../common/DataTable.vue';
 	import ChartBox from '../common/ChartBox.vue';
@@ -44,11 +45,19 @@
 			}
 		},
 		onLoad(options) {
+			/**
+			 * 初始化检查本地是否保存有已测试的数据
+			 * 有的话展示本地保存的数据
+			 */
 			const routerParam = JSON.parse(options.routerParam);
-			this.item = routerParam;
-			if (routerParam.sensorTypeList && routerParam.sensorTypeList.length) {
-				this.testProjectName = routerParam.sensorTypeList[0].name
-				this.filterData = [routerParam.sensorTypeList.map((item, index) => Object.assign(item, {text: item.name, value: index}))]
+			if (lodash.hasIn(uni.getStorageSync('TESTED_LIST'), [routerParam.id])) {
+				this.item = uni.getStorageSync('TESTED_LIST')[routerParam.id]
+			} else {
+				this.item = routerParam;
+			}
+			if (this.item.sensorTypeList && this.item.sensorTypeList.length) {
+				this.testProjectName = this.item.sensorTypeList[0].name
+				this.filterData = [this.item.sensorTypeList.map((item, index) => Object.assign(item, {text: item.name, value: index}))]
 			};
 		},
 		methods: {
@@ -62,7 +71,18 @@
 			 * 点击要测试的点位
 			 */
 			onClicklocation(index, dataIndex, item) {
-				this.$set(this.item.deviceList[index], dataIndex, (Math.random()*(0-100) + 100).toFixed(2))
+				this.$set(this.item.deviceList[index], dataIndex, (Math.random()*(0-100) + 100).toFixed(2));
+				const testedList = {};
+				if (uni.getStorageSync('TESTED_LIST')) {
+					Object.assign(testedList, uni.getStorageSync('TESTED_LIST'))
+				};
+				Object.assign(testedList, {[this.item.id]: this.item});
+				uni.setStorageSync('TESTED_LIST', testedList);
+				// const testResult = [];
+				// this.$Service.uploadTestResult(testResult).then((resp) => {
+				// 	if (!resp || !resp.success) return;
+
+				// })
 			}
 		},
 		/**

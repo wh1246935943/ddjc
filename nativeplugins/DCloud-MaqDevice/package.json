@@ -1,0 +1,20 @@
+{
+	"name": "MaqDevice",
+	"id": "DCloud-MaqDevice",
+	"version": "0.0.1",
+	"description": "示例插件",
+	"_dp_type":"nativeplugin",
+	"_dp_nativeplugin":{
+		"android": {
+			"plugins": [
+				{
+					"type": "module",
+					"name": "DCloud-MaqDevice",
+					"class": "uni.dcloud.io.uniplugin_device.TcpClient"
+				}
+			],
+			"integrateType": "aar",
+			"minSdkVersion" : 16
+		}
+	}
+}

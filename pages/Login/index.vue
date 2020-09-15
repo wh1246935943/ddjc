@@ -46,6 +46,11 @@
 						:loading="isLoading"
 						class="confirm-btn"
 					>登录</button>
+					<button
+						class="confirm-btn"
+						style="margin-top: 30px"
+						@click="testPlugin"
+					>插件测试</button>
 				</form>
 			</view>
 		</view>
@@ -55,6 +60,8 @@
 <script>
 	import { mapMutations } from 'vuex';
 	import lodash from 'lodash';
+	const maqDeviceModule = uni.requireNativePlugin('DCloud-MaqDevice');
+	const modal = uni.requireNativePlugin('modal');
 	export default{
 		data(){
 			return {
@@ -85,6 +92,22 @@
 			}
 		},
 		methods: {
+			/**
+			 * 插件测试
+			 */
+			testPlugin() {
+				maqDeviceModule.connect({
+					'hostIP': '127.0.0.1',
+					'port': 8000
+				},
+				(ret) => {
+					modal.toast({
+						message: ret,
+						duration: 1.5
+					});
+				})
+			},
+			
 			inputChange(e){
 				const key = e.currentTarget.dataset.key;
 				this[key] = e.detail.value;

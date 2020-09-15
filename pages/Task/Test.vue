@@ -28,6 +28,7 @@
 	import DataTable from '../common/DataTable.vue';
 	import ChartBox from '../common/ChartBox.vue';
 	const testPageTypeNames = ['空声AA', '地电压TEV', '特高频UHF', '高频HFCT', '接触式超声波AE'];
+	const FvvUniWifiHelper = uni.requireNativePlugin("Fvv-UniWifiHelper");
 	export default {
 		components:{ RenDropdownFilter, DataTable, ChartBox },
 		data() {
@@ -45,6 +46,12 @@
 			}
 		},
 		onLoad(options) {
+			/**
+			 * 初始化wifi控件
+			 */
+			FvvUniWifiHelper.init((res) => {
+				console.log(res)
+			});
 			/**
 			 * 初始化检查本地是否保存有已测试的数据
 			 * 有的话展示本地保存的数据

@@ -72,7 +72,8 @@
 			 * 选择测试项目
 			 */
 			onSelected(res){
-				this.testProjectName = res[0][0].name
+				this.testProjectName = res[0][0].name;
+				FvvUniWifiHelper.openWifi()
 			},
 			/**
 			 * 点击要测试的点位

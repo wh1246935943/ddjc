@@ -45,7 +45,8 @@
 <script>
 	import { ItemCard, EmptyBox } from 'wh-ui';
 	import lodash from 'lodash';
-	import { carouselList } from '@common/json.js'
+	import { carouselList } from '@common/json.js';
+	import data from '@static/temp/data.js'
 	export default {
 		components:{ ItemCard, EmptyBox },
 		data() {
@@ -70,7 +71,8 @@
 				this.$Service.getTaskList({tester: userInfo.user.userId}).then((resp) => {
 					if (!resp || !resp.success) return;
 					console.log('resp.data:::', resp.data)
-					this.taskList = resp.data
+					// this.taskList = resp.data;
+					this.taskList = data
 				})
 			},
 			/**

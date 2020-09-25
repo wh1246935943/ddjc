@@ -28,4 +28,19 @@ export default class Service {
       method: 'POST',
     })
   };
+	/**
+	 * 任务完成
+	 */
+	taskComplete(param) {
+		return request('admin/task/complete', {
+		  data: param,
+		  method: 'PUT',
+		})
+	}
+	/**
+	 * 获取基础数据
+	 */
+	getBaseInfo() {
+		return request('admin/dataManage/baseInfo')
+	}
 }

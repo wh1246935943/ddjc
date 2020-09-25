@@ -100,6 +100,20 @@
                     "pid" : "",
                     "parameters" : {}
                 }
+            },
+            "DCloud-MaqDevice" : {
+                "__plugin_info__" : {
+                    "name" : "MaqDevice",
+                    "description" : "示例插件",
+                    "platforms" : "Android",
+                    "url" : "",
+                    "android_package_name" : "",
+                    "ios_bundle_id" : "",
+                    "isCloud" : false,
+                    "bought" : -1,
+                    "pid" : "",
+                    "parameters" : {}
+                }
             }
         }
     },

@@ -58,7 +58,7 @@ const request = (url, options, isLoading = true) => {
 	if (url !== 'admin/auth/login') Object.assign(header, defaultOptions.header, {Authorization})
   return new Promise((resolve, reject) => {
     uni.request({
-      url: `http://ecm.lanntu.top/${url}`,
+      url: `http://ecm.lanntu.top:8002/${url}`,
       ...defaultOptions,
 			header,
       success(resp) {

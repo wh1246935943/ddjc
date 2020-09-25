@@ -14,7 +14,7 @@
 				}
 			],
 			"integrateType": "aar",
-			"minSdkVersion" : 16
+			"minSdkVersion" : 26
 		}
 	}
 }

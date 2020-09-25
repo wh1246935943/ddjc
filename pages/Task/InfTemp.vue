@@ -41,7 +41,7 @@
 					sizeType: ['compressed'],
 					success: ({tempFilePaths, tempFiles}) => {
 						uni.uploadFile({
-							url: 'http://ecm.lanntu.top/admin/file/upload',
+							url: 'http://ecm.lanntu.top:8002/admin/file/upload',
 							filePath: tempFilePaths[0],
 							name: 'file',
 							header: {

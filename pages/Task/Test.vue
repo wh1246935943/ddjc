@@ -67,10 +67,10 @@
 			onSelected(res){
 				this.testProjectName = res[0][0].name;
 				const TESTED_LIST = uni.getStorageSync('TESTED_LIST');
-				console.log('TESTED_LIST:', TESTED_LIST);
+				const { userInfo } = this.$store.state;
 				const testResult = [{
-					taskId: 21,//任务id
-					userName: "tester1",//手机端登录的用户名
+					taskId: this.item.id,//任务id
+					userName: userInfo.user.username,//手机端登录的用户名
 					sensorTypeID: 1,//传感器key值
 					ambTemperature: 36.8,//环境温度
 					deviceId: 1, //设备Id
@@ -100,19 +100,6 @@
 							alarmSta:0,
 							dischargeType: "",
 							specFileName: "位置2.txt",
-							nowTime: new Date().format('yyyy-MM-dd HH:mm:ss')
-						},
-						{
-							sensorTypeID : 3,
-							location : "位置3",
-							qmax:300,
-							qphase:0.00,
-							qPulseNum: 14.5,
-							f1: 0.00,
-							f2:0.00,
-							alarmSta:0,
-							dischargeType: "",
-							specFileName: "位置3.txt",
 							nowTime: new Date().format('yyyy-MM-dd HH:mm:ss')
 						}
 					]

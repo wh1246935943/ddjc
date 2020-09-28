@@ -86,36 +86,7 @@
                 }
             }
         },
-        "nativePlugins" : {
-            "Fvv-UniWifiHelper" : {
-                "__plugin_info__" : {
-                    "name" : "Fvv-UniWifiHelper",
-                    "description" : "安卓wifi助手，端口扫描",
-                    "platforms" : "Android",
-                    "url" : "",
-                    "android_package_name" : "",
-                    "ios_bundle_id" : "",
-                    "isCloud" : false,
-                    "bought" : -1,
-                    "pid" : "",
-                    "parameters" : {}
-                }
-            },
-            "DCloud-MaqDevice" : {
-                "__plugin_info__" : {
-                    "name" : "MaqDevice",
-                    "description" : "示例插件",
-                    "platforms" : "Android",
-                    "url" : "",
-                    "android_package_name" : "",
-                    "ios_bundle_id" : "",
-                    "isCloud" : false,
-                    "bought" : -1,
-                    "pid" : "",
-                    "parameters" : {}
-                }
-            }
-        }
+        "nativePlugins" : {}
     },
     /* SDK配置 */
     "quickapp" : {},

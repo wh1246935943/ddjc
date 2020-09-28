@@ -9,9 +9,20 @@ const store = new Vuex.Store({
 	state: {
 		userInfo,
 		isNetWork: false,
-		netWorkType: ''
+		netWorkType: '',
+		taskList: []
 	},
 	mutations: {
+		/**
+		 * 更新任务列表
+		 */
+		SET_TASKLIST: (state, param) => {
+			if (param.flag === 0) state.taskList = param.list;
+			if (param.flag === 1) {
+				const index = state.taskList.findIndex((item) => item.id === param.id);
+				state.taskList.splice(index, 1)
+			}
+		},
 		/**
 		 * 更新网络状态
 		 */

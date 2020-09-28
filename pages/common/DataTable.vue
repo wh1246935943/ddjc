@@ -33,7 +33,7 @@
 					{title: '前下', dataIndex: 'location2'},
 					{title: '后上', dataIndex: 'location3'},
 					{title: '后中', dataIndex: 'location4'},
-					{title: '后上', dataIndex: 'location5'}
+					{title: '后下', dataIndex: 'location5'}
 				];
 				const b = [
 					{title: '位置1', dataIndex: 'location0'},

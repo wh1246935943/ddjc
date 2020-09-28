@@ -92,8 +92,18 @@
 		 * 点击导航栏完成按钮
 		 */
 		onNavigationBarButtonTap() {
-			this.$toast('完成111')
-			console.log(this.imgList)
+			uni.showModal({
+				content: '确定要提交以完成这个任务吗?',
+				success: (e)=>{
+					if(e.confirm){
+						this.$Service.taskComplete({taskId: this.item.id}).then((resp) => {
+							if (!resp || !resp.success) return;
+							this.$toast('操作成功');
+							uni.navigateBack()
+						})
+					}
+				}
+			})
 		}
 	}
 </script>

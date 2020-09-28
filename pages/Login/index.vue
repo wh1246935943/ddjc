@@ -60,8 +60,8 @@
 <script>
 	import { mapMutations } from 'vuex';
 	import lodash from 'lodash';
-	const maqDeviceModule = uni.requireNativePlugin('DCloud-MaqDevice');
-	const modal = uni.requireNativePlugin('modal');
+	// const maqDeviceModule = uni.requireNativePlugin('DCloud-MaqDevice');
+	// const modal = uni.requireNativePlugin('modal');
 	export default{
 		data(){
 			return {
@@ -96,17 +96,17 @@
 			 * 插件测试
 			 */
 			testPlugin() {
-				maqDeviceModule.connect({
-					'hostIP': '127.0.0.1',
-					'port': 8000
-				},
-				(ret) => {
-					console.log(123);
-					modal.toast({
-						message: ret,
-						duration: 1.5
-					});
-				})
+				// maqDeviceModule.connect({
+				// 	'hostIP': '127.0.0.1',
+				// 	'port': 8000
+				// },
+				// (ret) => {
+				// 	console.log(123);
+				// 	modal.toast({
+				// 		message: ret,
+				// 		duration: 1.5
+				// 	});
+				// })
 			},
 			
 			inputChange(e){

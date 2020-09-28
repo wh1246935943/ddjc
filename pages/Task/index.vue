@@ -46,7 +46,6 @@
 	import { ItemCard, EmptyBox } from 'wh-ui';
 	import lodash from 'lodash';
 	import { carouselList } from '@common/json.js';
-	// import data from '@static/temp/data.js';
 	export default {
 		components:{ ItemCard, EmptyBox },
 		data() {
@@ -54,11 +53,14 @@
 				titleNViewBackground: carouselList[0].background,
 				swiperLength: carouselList.length,
 				carouselList: carouselList,
-				swiperCurrent: 0,
-				taskList: []
+				swiperCurrent: 0
 			};
 		},
-
+		computed: {
+			taskList() {
+				return this.$store.state.taskList
+			}
+		},
 		onLoad() {
 			this.getTaskList()
 		},
@@ -70,8 +72,8 @@
 				const { userInfo } = this.$store.state;
 				this.$Service.getTaskList({tester: userInfo.user.userId}).then((resp) => {
 					if (!resp || !resp.success) return;
-					console.log('resp.data:::', resp.data)
-					this.taskList = resp.data;
+					console.log('resp.data:::', resp.data);
+					this.$store.commit('SET_TASKLIST', {flag: 0, list: resp.data})
 				})
 			},
 			/**

@@ -20,7 +20,7 @@ export default class Service {
 	  return request(`admin/task/all?${stringify(param)}`)
   };
   /**
-   * 上传图片
+   * 上传测试数据
    */
   uploadTestResult(param) {
     return request('admin/taskInfo/add', {

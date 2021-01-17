@@ -1,60 +1,19 @@
 {
 	"pages": [
-		// {
-		// 	"path": "pages/PreLogin/index",
-		// 	"style": {
-		// 		"navigationStyle": "custom"
-		// 	}
-		// },
-		{
-			"path": "pages/Login/index",
-			"style": {
-				"navigationStyle": "custom",
-				"app-plus": {
-					"titleNView": false,
-					"animationType": "slide-in-bottom"
-				}
-			}
-		},
 		{
 			"path": "pages/Task/index",
 			"style": {
-				"navigationBarTitleText": "任务列表",
-				"app-plus": {
-					"titleNView": {
-						"type": "transparent",
-						"buttons": [{
-							"text": "设置",
-							"fontSize": "16",
-							"background": "rgba(0,0,0,0)"
-						}]
-					}
-				}
+				"navigationBarTitleText": "摇号"
 			}
 		},
 		{
-			"path" : "pages/Task/Test",
-			"style" : {
-				"navigationBarTitleText": "测试",
+			"path": "pages/Partake/index",
+			"style": {
+				"navigationBarTitleText": "参与人员",
 				"app-plus": {
 					"titleNView": {
 						"buttons": [{
-							"text": "完成",
-							"fontSize": "16",
-							"background": "rgba(0,0,0,0)"
-						}]
-					}
-				}
-			}
-		},
-		{
-			"path" : "pages/Task/InfTemp",
-			"style" : {
-				"navigationBarTitleText": "红外测温",
-				"app-plus": {
-					"titleNView": {
-						"buttons": [{
-							"text": "完成",
+							"text": "全部",
 							"fontSize": "16",
 							"background": "rgba(0,0,0,0)"
 						}]
@@ -65,71 +24,45 @@
 		{
 			"path": "pages/Set/index",
 			"style": {
-				"navigationBarTitleText": "设置"
+				"navigationBarTitleText": "管理全部人员"
 			}
 		},
 		{
 			"path" : "pages/Set/SysConfig"
-		},
-		{
-			"path": "pages/Data/index",
-			"style": {
-				"app-plus": {
-					"titleNView": {
-						"searchInput": {
-							"backgroundColor": "rgba(231, 231, 231,.7)",
-							"borderRadius": "16px",
-							"placeholder": "搜索",
-							"placeholderColor": "#606266"
-						},
-						"buttons": [{
-							"text": "搜索",
-							"fontSize": "14",
-							"color": "#fff",
-							"background": "rgba(0,0,0,0)"
-						}]
-					}
-				}
-			}
-		},
-		{
-			"path": "pages/Data/Details",
-			"style": {
-				"navigationBarTitleText": "数据详情"
-			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "#fff",
-		"navigationBarTitleText": "带电检测",
-		"navigationBarBackgroundColor": "#1f9689"
+		"navigationBarTitleText": "摇号",
+		"navigationBarBackgroundColor": "#36cfc9"
 	},
 	"tabBar": {
 		"color": "#C0C4CC",
 		"selectedColor": "#1f9689",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
-		"list": [{
-				"pagePath": "pages/Task/index",
-				"iconPath": "static/tabbar_rw_n.png",
-				"selectedIconPath": "static/tabbar_rw_y.png",
-				"text": "任务"
-			}
-			// {
-			// 	"pagePath": "pages/Data/index",
-			// 	"iconPath": "static/tabbar_sj_n.png",
-			// 	"selectedIconPath": "static/tabbar_sj_y.png",
-			// 	"text": "数据管理"
-			// }
-		]
-	},
-	"condition" : { //模式配置，仅开发期间生效
-		"current": 0, //当前激活的模式(list 的索引项)
 		"list": [
 			{
-				"name": "", //模式名称
-				"path": "", //启动页面，必选
-				"query": "" //启动参数，在页面的onLoad函数里面得到
+				"pagePath": "pages/Task/index",
+				"iconPath": "static/youxi1.png",
+				"selectedIconPath": "static/youxi.png",
+				"text": "摇号"
+			},
+			{
+				"pagePath": "pages/Partake/index",
+				"iconPath": "static/renyuan1.png",
+				"selectedIconPath": "static/renyuan.png",
+				"text": "参与人员"
+			}
+		]
+	},
+	"condition" : {
+		"current": 0,
+		"list": [
+			{
+				"name": "",
+				"path": "",
+				"query": ""
 			}
 		]
 	}

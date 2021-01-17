@@ -34,11 +34,6 @@ const checkStatus = (response) => {
 
 const request = (url, options, isLoading = true) => {
 	const Authorization = uni.getStorageSync('Authorization')
-	if (url !== 'admin/auth/login' && !Authorization) {
-		uni.reLaunch({ url: '/pages/Login/index' });
-		Vue.prototype.$toast('登录已过期,请重新登录');
-		return
-	};
   const defaultOptions = {
     method: 'GET',
     isErrorTip: true
@@ -65,11 +60,6 @@ const request = (url, options, isLoading = true) => {
         console.log(`request:::param:::${url}:::`, options);
         console.log(`success:::back:::${url}:::`, resp);
         checkStatus(resp);
-				if (resp.data.code === 1001) {
-					uni.reLaunch({ url: '/pages/Login/index' });
-					Vue.prototype.$toast('登录已过期,请重新登录');
-					return
-				}
 				/**
 				 * 添加接口成功的标识，方便前端统一判断
 				 */

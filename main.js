@@ -1,8 +1,8 @@
 import Vue from 'vue';
-import store from './store';
 import App from './App';
 import { stringify } from 'qs';
 import service from './request/index.js';
+import store from './store';
 
 const weekday = [
   '星期日',
@@ -36,19 +36,6 @@ if (!Date.prototype.format) {
   };
 }
 
-const msg = (title, duration=1500, mask=false, icon='none')=>{
-	//统一提示方便全局修改
-	if(Boolean(title) === false){
-		return;
-	}
-	uni.showToast({
-		title,
-		duration,
-		mask,
-		icon
-	});
-};
-
 const showToast = (msg = '', verticalAlign = 'top', duration = 'long') => {
 	void plus.nativeUI.toast(
 		msg,
@@ -59,11 +46,32 @@ const showToast = (msg = '', verticalAlign = 'top', duration = 'long') => {
 	)
 };
 
+const openDatabase = () => {
+  plus.sqlite.openDatabase({
+    name: 'yaohao',
+    path: '_doc/yaohao.db',
+    success: (e) => {
+      console.log('sql opened')
+      plus.sqlite.executeSql({
+        name: 'yaohao',
+        sql: 'CREATE TABLE IF NOT EXISTS dataBase(name CHAR(255), isAlready BIT)',
+        success: () => {
+          console.log('opened')
+          // store.commit('SET_USERLIST', {flag: 1})
+        },
+        fail: (e) => console.log(e)
+      })
+    },
+    fail: (e) => openDatabase()
+  });
+};
+openDatabase();
+
 Vue.config.productionTip = false
 Vue.prototype.$fire = new Vue();
 Vue.prototype.$store = store;
 Vue.prototype.$toast = showToast;
-Vue.prototype.$Service = service;
+// Vue.prototype.$Service = service;
 Vue.prototype.$windowWidth = uni.getSystemInfoSync().windowWidth;
 
 App.mpType = 'app';

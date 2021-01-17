@@ -1,30 +1,8 @@
 <script>
-	/**
-	 * vuex管理登陆状态，具体可以参考官方登陆模板示例
-	 */
-	import { mapMutations } from 'vuex';
 	export default {
-		methods: {
-			...mapMutations(['login'])
-		},
-		onLaunch: function() {
-			let userInfo = uni.getStorageSync('userInfo') || '';
-			if(userInfo.id){
-				//更新登陆状态
-				uni.getStorage({
-					key: 'userInfo',
-					success: (res) => {
-						this.login(res.data);
-					}
-				});
-			};
-			uni.onNetworkStatusChange((res) => {
-				console.log('监听网络状态变化:::', res)
-				this.$store.commit('SET_NETWORK', res)
-			})
-		},
 		onShow: function() {
-			console.log('App Show')
+			console.log('App Show');
+			this.$store.commit('SET_USERLIST', {flag: 1})
 		},
 		onHide: function() {
 			console.log('App Hide')

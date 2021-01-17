@@ -26,7 +26,6 @@
 		},
 		//点击导航栏 buttons 时触发
 		onNavigationBarButtonTap() {
-			// this.$store.commit('SET_USERLIST', {flag: 1, data: []})
 			uni.navigateTo({
 				url: `/pages/Set/index`
 			})

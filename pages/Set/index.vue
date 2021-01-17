@@ -48,7 +48,7 @@
 			},
 			// 添加新用户
 			addUser(){
-				this.$store.commit('SET_USERLIST', {flag: 4, data: [{name: Math.floor(Math.random()*10), isAlready: 0}]})
+				this.$store.commit('SET_USERLIST', {flag: 4, data: [{name: `${Math.floor(Math.random()*10)}`, isAlready: 1}]})
 			}
 		}
 	}

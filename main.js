@@ -34,7 +34,7 @@ if (!Date.prototype.format) {
       addZero ? format(config[a]) : config[a],
     );
   };
-}
+};
 
 const showToast = (msg = '', verticalAlign = 'top', duration = 'long') => {
 	void plus.nativeUI.toast(

@@ -15,38 +15,35 @@ const store = new Vuex.Store({
       if (flag === 1) {
         plus.sqlite.selectSql({
           name: 'yaohao',
-          sql: 'select * from database',
+          sql: 'select * from dataBase',
           success: (list) => {
             userList.push(...list)
-          },
-          fail: (e) => console.log(e)
+          }
         });
       };
       if (flag === 2) {
         plus.sqlite.executeSql({
 					name: 'yaohao',
-					sql: `delete from database where name = '${userList[index].name}'`,
+					sql: `delete from dataBase where name = '${userList[index].name}'`,
 				});
         Vue.delete(userList, index);
       };
       if (flag === 3) {
 				const itemIndex = userList.findIndex(({name}) => name === index)
-        Vue.set(userList[itemIndex], 'isAlready', data);
+				Vue.set(userList[itemIndex], 'isAlready', data);
         plus.sqlite.executeSql({
 					name: 'yaohao',
-					sql: `update database set isAlready='${data}' where name='${userList[itemIndex].name}'`,
+					sql: `update dataBase set isAlready=${data} where name='${userList[itemIndex].name}'`,
 				});
       };
       if (flag === 4) {
-        userList.push(...data);
-        const sqlValue = data.map(({name, isAlready}) => `('${name}', ${isAlready})`).join(',')
+				const filterData =  data.filter((item) => userList.findIndex(({name}) => name === item.name) === -1);
+				if (filterData.length === 0) return
+        userList.push(...filterData);
+        const sqlValue = filterData.map(({name, isAlready}) => `('${name}', ${isAlready})`).join(',')
         plus.sqlite.executeSql({
 					name: 'yaohao',
 					sql: `insert into dataBase values${sqlValue}`,
-					success: function(e){
-						console.log('executeSql success!');
-					},
-					fail: (e) => console.log(e)
 				})
       };
 		}

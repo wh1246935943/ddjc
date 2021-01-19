@@ -1,20 +1,37 @@
 <template>
 	<view class="container">
 		<view class="result-list">
-			{{partakeNameList.join('、')}}
+			<uni-list
+				:list="matter"
+				:isDelBtn="false"
+				isUniNumber
+				@onNumber="onNumber"
+			></uni-list>
 		</view>
 		<view class="start-btn" @click="start">开始</view>
 	</view>
 </template>
 
 <script>
+	import { UniNumber, UniList } from 'wh-ui';
 	export default {
 		data() {
 			return {
-				partakeNameList: []
+				matter: [
+					{name: '擦桌子', quota: 1, subordinate: []},
+					{name: '浇花', quota: 1, subordinate: []},
+					{name: '卫生间', quota: 1, subordinate: []},
+					{name: '扫地', quota: 2, subordinate: []},
+					{name: '拖地', quota: 2, subordinate: []}
+				]
 			};
 		},
 		methods: {
+			onNumber(index, value) {
+				console.log(index, value);
+				this.$set(this.matter[index], 'quota', value)
+			},
+			// 开始摇号
 			start() {
 				function shuffle(data) {
 					var input = data;
@@ -25,12 +42,23 @@
 						input[i] = itemAtIndex;
 					}
 					return input;
-				}
+				};
+
 				this.$store.state.userList.filter(({isAlready}) => isAlready === 1).map(({name}) => name);
 				const { userList = [] } = this.$store.state;
 				const alreadyData = shuffle(userList.filter(({isAlready}) => isAlready === 1));
 				console.log(alreadyData);
-				this.partakeNameList = alreadyData.map(({name}) => name);
+				const userName = alreadyData.map(({name}) => name);
+
+				let cIndex = -1
+				this.matter.forEach(item => {
+					cIndex += item.quota;
+					this.$set(
+						item,
+						'subordinate',
+						userName.filter((name, index) => index > (cIndex - item.quota) && index <= cIndex)
+					)
+				});
 			}
 		}
 	}
@@ -55,7 +83,7 @@
 			align-items: center;
 			height: 100%;
 			width: 100%;
-			background: rgb(0, 238, 255);
+			overflow-y: auto;
 		}
 		.start-btn{
 			width: 200upx;

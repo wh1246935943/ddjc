@@ -1,8 +1,10 @@
 <script>
 	export default {
+		onLaunch: function() {
+			this.$store.commit('SET_USERLIST', {flag: 1})
+		},
 		onShow: function() {
 			console.log('App Show');
-			this.$store.commit('SET_USERLIST', {flag: 1})
 		},
 		onHide: function() {
 			console.log('App Hide')

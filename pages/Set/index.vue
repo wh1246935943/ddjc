@@ -57,13 +57,13 @@
 		methods:{
 			submit(filesValue) {
 				console.log(filesValue);
-				const nameStr = filesValue.detail.value.names.replace(' ', '');
+				let nameStr = filesValue.detail.value.names.replace(' ', '');
 				console.log(nameStr);
 				if (!nameStr) {
 					Vue.prototype.$toast('请输入要添加的人名');
 					return
 				};
-				const names = nameStr.split(','||'，');
+				const names = nameStr.replace(/[\uff0c]/g, ",").split(',');
 				const data = names.map((name) => ({name, isAlready: 0}))
 				this.$store.commit('SET_USERLIST', {flag: 4, data});
 				this.isShowModal = false

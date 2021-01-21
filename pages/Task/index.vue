@@ -2,9 +2,9 @@
 	<view class="container">
 		<view class="result-list">
 			<uni-list
-				:list="matter"
+				:list="dataList"
 				:isDelBtn="false"
-				isUniNumber
+				:isUniNumber="typeIndex === 0"
 				@onNumber="onNumber"
 			></uni-list>
 		</view>
@@ -17,14 +17,23 @@
 	export default {
 		data() {
 			return {
+				isUniNumber: true,
 				matter: [
 					{name: '擦桌子', quota: 1, subordinate: []},
 					{name: '浇花', quota: 1, subordinate: []},
 					{name: '卫生间', quota: 1, subordinate: []},
 					{name: '扫地', quota: 2, subordinate: []},
 					{name: '拖地', quota: 2, subordinate: []}
-				]
+				],
+				memberList: [],
+				typeIndex: 0
 			};
+		},
+		computed: {
+			dataList() {
+				if (this.typeIndex === 0) return this.matter;
+				if (this.typeIndex === 1) return this.memberList
+			}
 		},
 		methods: {
 			onNumber(index, value) {
@@ -44,11 +53,11 @@
 					return input;
 				};
 
-				this.$store.state.userList.filter(({isAlready}) => isAlready === 1).map(({name}) => name);
 				const { userList = [] } = this.$store.state;
-				const alreadyData = shuffle(userList.filter(({isAlready}) => isAlready === 1));
-				console.log(alreadyData);
-				const userName = alreadyData.map(({name}) => name);
+				this.memberList = shuffle(userList.filter(({isAlready}) => isAlready === 1));
+				if (this.typeIndex === 1) return;
+
+				const userNames = this.memberList.map(({name}) => name);
 
 				let cIndex = -1
 				this.matter.forEach(item => {
@@ -56,10 +65,19 @@
 					this.$set(
 						item,
 						'subordinate',
-						userName.filter((name, index) => index > (cIndex - item.quota) && index <= cIndex)
+						userNames.filter((name, index) => index > (cIndex - item.quota) && index <= cIndex)
 					)
 				});
 			}
+		},
+		//点击导航栏 buttons 时触发
+		onNavigationBarButtonTap() {
+			uni.showActionSheet({
+				itemList: ['打扫卫生', '随机排序'],
+				success: ({tapIndex}) => {
+					this.typeIndex = tapIndex;
+				}
+			});
 		}
 	}
 </script>

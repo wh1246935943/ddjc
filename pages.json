@@ -3,7 +3,14 @@
 		{
 			"path": "pages/Task/index",
 			"style": {
-				"navigationBarTitleText": "摇号"
+				"navigationBarTitleText": "摇号",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"type":"menu"
+						}]
+					}
+				}
 			}
 		},
 		{
